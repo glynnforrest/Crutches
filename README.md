@@ -1,11 +1,17 @@
 # Crutches
-## A PHP library to manipulate images
+## A PHP utility library
 
 [![Build Status](https://travis-ci.org/glynnforrest/Crutches.png)](https://travis-ci.org/glynnforrest/Crutches)
 
 ## Intro
 
-Crutches is a collection of utility classes for php
+Crutches is a collection of utility classes for PHP for every day problems, such as dealing with strings, numbers, arrays and words.
+
+### Classes included in Crutches
+
+* DotArray for working with arrays using dot notation.
+* An Inflector for working with plurals, with support for different languages.
+
 
 ## Installation
 
