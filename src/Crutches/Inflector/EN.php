@@ -15,7 +15,9 @@ class EN extends Inflector {
 		'jeans',
 		'scissors',
 		'fish',
-		'sheep'
+		'sheep',
+		'moose',
+		'deer'
 	);
 
 	protected $plurals = array (

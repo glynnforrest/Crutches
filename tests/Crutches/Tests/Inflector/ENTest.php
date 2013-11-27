@@ -37,6 +37,8 @@ class ENTest extends \PHPUnit_Framework_TestCase {
 			array('shoe', 'shoes'),
 			array('message', 'messages'),
 			array('goose', 'geese'),
+			array('moose', 'moose'),
+			array('deer', 'deer'),
 		);
 	}
 
