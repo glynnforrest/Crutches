@@ -3,5 +3,10 @@ VERSION 0  FIRST ALPHA
 =======================
 
    Version 0.1 - First alpha
+      27/11/2013 16:22  0.1.2  Inflector improvements
+         abc2c29 Adding two ignored words to Inflector\EN.
+         c105dc1 Cleaning up ENTest.
+         f992b35 Adding locale function to Inflector.
+         969e402 CHANGELOG fix.
       27/11/2013 11:36  0.1.1  initial release
          ea3b478 Adding liip/RMT for releases.
