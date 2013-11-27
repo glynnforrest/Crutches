@@ -1,8 +1,9 @@
 <?php
 
 if (!$loader = @include __DIR__ . '/../vendor/autoload.php') {
-    die('Composer autoloader not found.'.PHP_EOL.
-        'Please run `composer install`.'.PHP_EOL);
+	echo 'Composer autoloader not found.' . PHP_EOL;
+	echo 'Please run `composer install`.' . PHP_EOL;
+	exit(1);
 }
 
 $loader->add('Crutches\Test', __DIR__);
