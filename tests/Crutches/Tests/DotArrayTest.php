@@ -14,10 +14,10 @@ include(__DIR__ . '/../../bootstrap.php');
 class DotArrayTest extends \PHPUnit_Framework_TestCase {
 
 	protected $arr = array(
-		'one' => 1,
+		'one' => 'one',
 		'two' => array(
-			'one' => 2.1,
-			'two' => 2.2
+			'one' => 'two.one',
+			'two' => 'two.two'
 		));
 
 	public function testConstruct() {
@@ -29,54 +29,32 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGet() {
 		$c = new DotArray($this->arr);
-		$this->assertEquals(1, $c->get('one'));
-		$this->assertEquals(2.1, $c->get('two.one'));
-		$expected = array(
-			'one' => 1,
-			'two' => array(
-				'one' => 2.1,
-				'two' => 2.2
-			)
-		);
-		$this->assertEquals($expected, $c->get());
+		$this->assertEquals('one', $c->get('one'));
+		$this->assertEquals('two.one', $c->get('two.one'));
 	}
 
 	public function testGetDefault() {
 		$c = new DotArray($this->arr);
 		$this->assertEquals('default', $c->get('fake-key', 'default'));
-		$expected = array(
-			'one' => 1,
-			'two' => array(
-				'one' => 2.1,
-				'two' => 2.2
-			)
-		);
-		$this->assertEquals($expected, $c->get(null, 'default'));
+		$this->assertEquals('two.one', $c->get('two.one', 'default'));
 	}
 
 	public function testGetFirst() {
 		$c = new DotArray($this->arr);
-		$this->assertEquals(2.1, $c->getFirst('two'));
-		$this->assertEquals(1, $c->getFirst());
+		$this->assertEquals('two.one', $c->getFirst('two'));
+		$this->assertEquals('one', $c->getFirst());
 	}
 
 	public function testGetFirstDefault() {
 		$c = new DotArray($this->arr);
 		$this->assertEquals('default', $c->getFirst('fake-key', 'default'));
+		$this->assertEquals('two.one', $c->getFirst('two', 'default'));
 	}
 
 	public function testSet() {
 		$c = new DotArray($this->arr);
 		$c->set('three', 3);
 		$this->assertEquals(3, $c->get('three'));
-	}
-
-	public function testSetNoFile() {
-		$c = new DotArray($this->arr);
-		$c->set('ad-hoc', 'data');
-		$this->assertEquals('data', $c->get('ad-hoc'));
-		$c->set('nested', array('value' => 'foo'));
-		$this->assertEquals('foo', $c->get('nested.value'));
 	}
 
 	public function testSetNested() {
@@ -107,20 +85,13 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase {
 
 	public function testEmptyGet() {
 		$c = new DotArray($this->arr);
-		$this->assertEquals(array(
-			'one' => 1,
-			'two' => array(
-				'one' => 2.1,
-				'two' => 2.2
-			)
-		), $c->get());
-		$this->assertEquals(array(
-			'one' => 1,
-			'two' => array(
-				'one' => 2.1,
-				'two' => 2.2
-			)
-		), $c->get(null));
+		$this->assertEquals($this->arr, $c->get());
+		$this->assertEquals($this->arr, $c->get(null));
+	}
+
+	public function testEmptyGetWithDefault() {
+		$c = new DotArray($this->arr);
+		$this->assertEquals($this->arr, $c->get(null, 'default'));
 	}
 
 }
