@@ -76,7 +76,17 @@ class DotArray {
 			$scope = &$scope[$parts[$i]];
 		}
 		$scope[$parts[$i]] = $value;
-		$this->modified = true;
+	}
+
+	/**
+	 * Merge values in this DotArray instance with values from
+	 * $array. Any conflicting keys will be overwritten by those in
+	 * $array.
+	 *
+	 * @param array $array The array to merge
+	 */
+	public function merge(array $array) {
+		$this->array = array_replace_recursive($this->array, $array);
 	}
 
 }

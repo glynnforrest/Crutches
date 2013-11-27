@@ -94,4 +94,23 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->arr, $c->get(null, 'default'));
 	}
 
+	public function testMerge() {
+		$d = new DotArray($this->arr);
+		$override = array(
+			'three' => 'three',
+			'two' => array(
+				'two' => 'changed'
+			));
+		$expected = array(
+			'one' => 'one',
+			'two' => array(
+				'one' => 'two.one',
+				'two' => 'changed'
+			),
+			'three' => 'three',
+		);
+		$d->merge($override);
+		$this->assertSame($expected, $d->get());
+	}
+
 }

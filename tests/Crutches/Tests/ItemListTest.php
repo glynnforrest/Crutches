@@ -32,7 +32,6 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame(array('one', 'two'), $l->getList());
 	}
 
-
 	public function testPrefix() {
 		$l = new ItemList(array('one', 'two', 'three'));
 		$this->assertInstanceOf('\Crutches\ItemList', $l->prefix('$'));
