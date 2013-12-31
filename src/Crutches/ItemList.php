@@ -68,14 +68,17 @@ class ItemList {
 	 * @param string $string The string to add
 	 */
 	public function surround($string) {
-		return $this->prefix($string)->suffix($string);
+		foreach ($this->list as &$value) {
+			$value = $string . $value . $string;
+		}
+		return $this;
 	}
 
 	/**
-	 * Convert this ItemList to a string, seperating each value
-	 * with $delimeter. If supplied, $prefix and $suffix will be added
-	 * to each value. Unlike prefix(), suffix(), and surround(), the
-	 * list is not modified.
+	 * Convert this ItemList to a string, separating each value with
+	 * $delimeter. If supplied, $prefix and $suffix will be added to
+	 * each value. Unlike prefix(), suffix(), and surround(), the list
+	 * is not modified.
 	 *
 	 * @param string $delimeter The string to separate the value with
 	 * @param string $prefix The string to add to the start of each value
