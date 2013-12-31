@@ -68,7 +68,6 @@ abstract class Inflector {
 	public static function locale($locale = 'EN') {
 		$class = '\\Crutches\\Inflector\\' . $locale;
 		if(!class_exists($class)) {
-			echo "Unable to load Inflector class $class";
 			throw new \Exception("Unable to load Inflector class $class");
 		}
 		return new $class();
