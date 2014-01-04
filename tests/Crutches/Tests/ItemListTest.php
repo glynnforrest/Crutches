@@ -70,10 +70,37 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame($expected, $string);
 	}
 
+	public function testStringifyEmptyList() {
+		$l = new ItemList();
+		$string = $l->stringify();
+		$this->assertNull($string);
+	}
+
 	public function testToStringCallsStringify() {
 		$l = new ItemList(array('one'));
 		$this->assertSame($l->__toString(), $l->stringify());
 	}
 
+	public function testHuman() {
+		$l = new ItemList(array('red', 'blue', 'green'));
+		$string = $l->human();
+		$this->assertInternalType('string', $string);
+		$expected = 'The blanket was red, blue and green.';
+		$this->assertSame($expected, sprintf("The blanket was %s.", $string));
+	}
+
+	public function testHumanDifferentEnding() {
+		$l = new ItemList(array('one', 'two', 'three'));
+		$string = $l->human(', or');
+		$this->assertInternalType('string', $string);
+		$expected = 'Pick a number: one, two, or three.';
+		$this->assertSame($expected, sprintf("Pick a number: %s.", $string));
+	}
+
+	public function testHumanEmptyList() {
+		$l = new ItemList();
+		$this->assertNull($l->human());
+		$this->assertNull($l->human(', or'));
+	}
 
 }

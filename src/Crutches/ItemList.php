@@ -75,16 +75,18 @@ class ItemList {
 	}
 
 	/**
-	 * Convert this ItemList to a string, separating each value with
+	 * Get this ItemList as a string, separating each value with
 	 * $delimeter. If supplied, $prefix and $suffix will be added to
-	 * each value. Unlike prefix(), suffix(), and surround(), the list
-	 * is not modified.
+	 * each value. The list is not modified.
 	 *
 	 * @param string $delimeter The string to separate the value with
 	 * @param string $prefix The string to add to the start of each value
 	 * @param string $suffix The string to add to the end of each value
 	 */
 	public function stringify($delimeter = ', ', $prefix = '', $suffix = '') {
+		if(empty($this->list)) {
+			return null;
+		}
 		$string = '';
 		foreach($this->list as $value) {
 			$string .= $prefix . $value . $suffix . $delimeter;
@@ -94,6 +96,27 @@ class ItemList {
 
 	public function __toString() {
 		return $this->stringify();
+	}
+
+	/**
+	 * Get this ItemList as a string, where each value is separated
+	 * with a comma and space, except for the last item, which will be
+	 * prefixed with $ending (default is ' and'). The list is not
+	 * modified.
+	 *
+	 * @param string $ending The string to use before the last item
+	 */
+	public function human($ending = ' and') {
+		if(empty($this->list)) {
+			return null;
+		}
+		$string = '';
+		foreach($this->list as $value) {
+			$string .= $value . ', ';
+		}
+		$string = rtrim($string, ', ');
+		$second_last_comma = strrpos($string, ', ');
+		return substr($string, 0, $second_last_comma) . $ending . ' ' . end($this->list);
 	}
 
 }
