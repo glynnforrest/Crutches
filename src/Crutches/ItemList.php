@@ -136,8 +136,7 @@ class ItemList {
 	/**
 	 * Map $callback over all items in this list.
 	 *
-	 * @param callable $callback The function to map over each item in
-	 * this list.
+	 * @param callable $callback The function to map over each item.
 	 */
 	public function map($callback) {
 		if(!is_callable($callback)) {
@@ -146,6 +145,22 @@ class ItemList {
 			);
 		}
 		$this->list = array_map($callback, $this->list);
+		return $this;
+	}
+
+	/**
+	 * Use $callback to filter items in this list. Array keys are
+	 * reset after filtering.
+	 *
+	 * @param callable $callback The function to filter the list.
+	 */
+	public function filter($callback) {
+		if(!is_callable($callback)) {
+			throw new \Exception(
+				'Argument passed to ItemList::filter() is not callable.'
+			);
+		}
+		$this->list = array_values(array_filter($this->list, $callback));
 		return $this;
 	}
 

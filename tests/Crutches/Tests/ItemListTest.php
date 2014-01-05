@@ -131,4 +131,19 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$l->map('not a function');
 	}
 
+	public function testFilter() {
+		$l = new ItemList(array(0, 1, 2, 3, 4));
+		$f = function($value) {
+			return $value % 2 == 0;
+		};
+		$this->assertInstanceOf('\Crutches\ItemList', $l->filter($f));
+		$this->assertSame(array(0, 2, 4), $l->getList());
+	}
+
+	public function testFilterThrowsException() {
+		$l = new ItemList(array('foo', 'bar'));
+		$this->setExpectedException('\Exception', 'Argument passed to ItemList::filter() is not callable.');
+		$l->filter('not a function');
+	}
+
 }
