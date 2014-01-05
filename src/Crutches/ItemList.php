@@ -38,6 +38,20 @@ class ItemList {
 	}
 
 	/**
+	 * Get the element $index in this ItemList, or null if not defined.
+	 *
+	 * @param int $index The index of the element.
+	 */
+	public function get($index) {
+		if(!is_int($index)) {
+			throw new \Exception(
+				'Argument passed to ItemList::get() is not an integer.'
+			);
+		}
+		return isset($this->list[$index]) ? $this->list[$index] : null;
+	}
+
+	/**
 	 * Add $string to the start of each value in the list.
 	 *
 	 * @param string $string The string to add
@@ -117,6 +131,22 @@ class ItemList {
 		$string = rtrim($string, ', ');
 		$second_last_comma = strrpos($string, ', ');
 		return substr($string, 0, $second_last_comma) . $ending . ' ' . end($this->list);
+	}
+
+	/**
+	 * Map $callback over all items in this list.
+	 *
+	 * @param callable $callback The function to map over each item in
+	 * this list.
+	 */
+	public function map($callback) {
+		if(!is_callable($callback)) {
+			throw new \Exception(
+				'Argument passed to ItemList::map() is not callable.'
+			);
+		}
+		$this->list = array_map($callback, $this->list);
+		return $this;
 	}
 
 }

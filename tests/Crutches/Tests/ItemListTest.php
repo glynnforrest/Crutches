@@ -103,4 +103,32 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull($l->human(', or'));
 	}
 
+	public function testGet() {
+		$l = new ItemList(array('zero', 'one', 'two', 'three'));
+		$this->assertSame('zero', $l->get(0));
+		$this->assertSame('three', $l->get(3));
+		$this->assertNull($l->get(5));
+	}
+
+	public function testGetThrowsException() {
+		$l = new ItemList(array('zero', 'one', 'two', 'three'));
+		$this->setExpectedException('\Exception', 'Argument passed to ItemList::get() is not an integer.');
+		$l->get('foo');
+	}
+
+	public function testMap() {
+		$l = new ItemList(array('foo', 'bar'));
+		$f = function($value) {
+			return ucfirst($value);
+		};
+		$this->assertInstanceOf('\Crutches\ItemList', $l->map($f));
+		$this->assertSame('Foo', $l->get(0));
+	}
+
+	public function testMapThrowsException() {
+		$l = new ItemList(array('foo', 'bar'));
+		$this->setExpectedException('\Exception', 'Argument passed to ItemList::map() is not callable.');
+		$l->map('not a function');
+	}
+
 }
