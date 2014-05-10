@@ -164,4 +164,16 @@ class ItemList {
 		return $this;
 	}
 
+    /**
+     * Take a number of elements from the start of this ItemList and
+     * return a new ItemList instance with those values.
+     *
+     * @param int $amount The amount of elements to take
+     * @return ItemList A new ItemList instance with the selected taken elements
+     */
+    public function take($amount)
+    {
+        return new ItemList(array_slice($this->list, 0, $amount));
+    }
+
 }

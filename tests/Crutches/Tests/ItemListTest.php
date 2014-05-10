@@ -146,4 +146,12 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$l->filter('not a function');
 	}
 
+    public function testTake()
+    {
+        $l = new ItemList(array('foo', 'bar', 'baz'));
+        $taken = $l->take(2);
+        $this->assertInstanceOf('Crutches\ItemList', $taken);
+        $this->assertSame(array('foo', 'bar'), $taken->getList());
+    }
+
 }
