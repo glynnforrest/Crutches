@@ -147,6 +147,24 @@ class ItemList {
 		return new ItemList(array_map($callback, $this->list));
 	}
 
+    /**
+     * Apply $callback to all items in this list.
+     *
+     * @param callable $callback The function to apply to each item.
+     * @return ItemList This ItemList
+     */
+    public function walk($callback)
+    {
+        if(!is_callable($callback)) {
+            throw new \InvalidArgumentException(
+                'Argument passed to ItemList::walk() is not callable.'
+            );
+        }
+        array_walk($this->list, $callback);
+
+        return $this;
+    }
+
 	/**
 	 * Use $callback to filter items in this list. Array keys are
 	 * reset after filtering.

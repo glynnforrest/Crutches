@@ -194,4 +194,15 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $l->take(true);
     }
 
+    public function testWalk()
+    {
+        $l = new ItemList(array('foo', 'bar'));
+        $walked = $l->walk(function(&$value) {
+            $value = strtoupper($value);
+        });
+        $this->assertInstanceOf('Crutches\ItemList', $walked);
+        $this->assertSame($l, $walked);
+        $this->assertSame('FOO', $walked->get(0));
+    }
+
 }
