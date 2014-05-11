@@ -138,32 +138,22 @@ class ItemList {
 	 *
 	 * @param callable $callback The function to map over each item.
 	 */
-	public function map($callback) {
+	public function map($callback, $in_place = false) {
 		if(!is_callable($callback)) {
 			throw new \InvalidArgumentException(
 				'Argument passed to ItemList::map() is not callable.'
 			);
 		}
-		return new ItemList(array_map($callback, $this->list));
-	}
 
-    /**
-     * Apply $callback to all items in this list.
-     *
-     * @param callable $callback The function to apply to each item.
-     * @return ItemList This ItemList
-     */
-    public function walk($callback)
-    {
-        if(!is_callable($callback)) {
-            throw new \InvalidArgumentException(
-                'Argument passed to ItemList::walk() is not callable.'
-            );
+        $mapped = array_map($callback, $this->list);
+
+        if ($in_place) {
+            $this->list = $mapped;
+            return $this;
         }
-        array_walk($this->list, $callback);
 
-        return $this;
-    }
+		return new ItemList($mapped);
+	}
 
 	/**
 	 * Use $callback to filter items in this list. Array keys are

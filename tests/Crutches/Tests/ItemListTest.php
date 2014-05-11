@@ -127,6 +127,15 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame('Foo', $mapped->get(0));
 	}
 
+    public function testMapInPlace()
+    {
+        $l = new ItemList(array('foo', 'bar'));
+        $walked = $l->map('strtoupper', true);
+        $this->assertInstanceOf('Crutches\ItemList', $walked);
+        $this->assertSame($l, $walked);
+        $this->assertSame('FOO', $walked->get(0));
+    }
+
 	public function testMapThrowsException() {
 		$l = new ItemList(array('foo', 'bar'));
 		$this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::map() is not callable.');
@@ -193,22 +202,5 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $this->setExpectedException('\InvalidArgumentException');
         $l->take(true);
     }
-
-    public function testWalk()
-    {
-        $l = new ItemList(array('foo', 'bar'));
-        $walked = $l->walk(function(&$value) {
-            $value = strtoupper($value);
-        });
-        $this->assertInstanceOf('Crutches\ItemList', $walked);
-        $this->assertSame($l, $walked);
-        $this->assertSame('FOO', $walked->get(0));
-    }
-
-	public function testWalkThrowsException() {
-		$l = new ItemList(array());
-		$this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::walk() is not callable.');
-		$l->walk('not a function');
-	}
 
 }
