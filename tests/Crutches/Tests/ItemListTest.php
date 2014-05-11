@@ -146,12 +146,27 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$l->filter('not a function');
 	}
 
-    public function testTake()
+    public function takeProvider()
     {
-        $l = new ItemList(array('foo', 'bar', 'baz'));
-        $taken = $l->take(2);
+        return array(
+            array(array('foo', 'bar', 'baz'), 2, array('foo', 'bar')),
+            array(array('foo'), 2, array('foo')),
+            array(array('foo', 'bar'), 0, array()),
+            //negative numbers count from the right
+            array(array('foo', 'bar', 'baz'), -1, array('foo', 'bar')),
+            array(array('foo', 'bar', 'baz'), -4, array())
+        );
+    }
+
+    /**
+     * @dataProvider takeProvider()
+     */
+    public function testTake($original_list, $amount, $new_list)
+    {
+        $l = new ItemList($original_list);
+        $taken = $l->take($amount);
         $this->assertInstanceOf('Crutches\ItemList', $taken);
-        $this->assertSame(array('foo', 'bar'), $taken->getList());
+        $this->assertSame($new_list, $taken->getList());
     }
 
 }
