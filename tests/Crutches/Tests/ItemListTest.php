@@ -153,6 +153,16 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame(array(0, 2, 4), $filtered->getList());
 	}
 
+    public function testFilterInPlace()
+    {
+        $l = new ItemList(array(0, 1, 2, 3, 4));
+        $filtered = $l->filter(function($value) {
+            return $value % 2 == 0;
+        }, true);
+        $this->assertSame($l, $filtered);
+        $this->assertSame(array(0, 2, 4), $filtered->getList());
+    }
+
 	public function testFilterThrowsException() {
 		$l = new ItemList(array('foo', 'bar'));
 		$this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::filter() is not callable.');

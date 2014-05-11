@@ -161,13 +161,20 @@ class ItemList {
 	 *
 	 * @param callable $callback The function to filter the list.
 	 */
-	public function filter($callback) {
+	public function filter($callback, $in_place = false) {
 		if(!is_callable($callback)) {
 			throw new \InvalidArgumentException(
 				'Argument passed to ItemList::filter() is not callable.'
 			);
 		}
-		return new ItemList(array_values(array_filter($this->list, $callback)));
+        $filtered = array_values(array_filter($this->list, $callback));
+
+        if ($in_place) {
+            $this->list = $filtered;
+            return $this;
+        }
+
+		return new ItemList($filtered);
 	}
 
     /**
