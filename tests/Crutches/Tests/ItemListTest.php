@@ -112,7 +112,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetThrowsException() {
 		$l = new ItemList(array('zero', 'one', 'two', 'three'));
-		$this->setExpectedException('\Exception', 'Argument passed to ItemList::get() is not an integer.');
+		$this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::get() is not an integer.');
 		$l->get('foo');
 	}
 
@@ -129,7 +129,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testMapThrowsException() {
 		$l = new ItemList(array('foo', 'bar'));
-		$this->setExpectedException('\Exception', 'Argument passed to ItemList::map() is not callable.');
+		$this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::map() is not callable.');
 		$l->map('not a function');
 	}
 
@@ -146,7 +146,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testFilterThrowsException() {
 		$l = new ItemList(array('foo', 'bar'));
-		$this->setExpectedException('\Exception', 'Argument passed to ItemList::filter() is not callable.');
+		$this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::filter() is not callable.');
 		$l->filter('not a function');
 	}
 
@@ -204,5 +204,11 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $this->assertSame($l, $walked);
         $this->assertSame('FOO', $walked->get(0));
     }
+
+	public function testWalkThrowsException() {
+		$l = new ItemList(array());
+		$this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::walk() is not callable.');
+		$l->walk('not a function');
+	}
 
 }

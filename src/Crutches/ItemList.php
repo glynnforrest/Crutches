@@ -44,7 +44,7 @@ class ItemList {
 	 */
 	public function get($index) {
 		if(!is_int($index)) {
-			throw new \Exception(
+			throw new \InvalidArgumentException(
 				'Argument passed to ItemList::get() is not an integer.'
 			);
 		}
@@ -140,7 +140,7 @@ class ItemList {
 	 */
 	public function map($callback) {
 		if(!is_callable($callback)) {
-			throw new \Exception(
+			throw new \InvalidArgumentException(
 				'Argument passed to ItemList::map() is not callable.'
 			);
 		}
@@ -173,7 +173,7 @@ class ItemList {
 	 */
 	public function filter($callback) {
 		if(!is_callable($callback)) {
-			throw new \Exception(
+			throw new \InvalidArgumentException(
 				'Argument passed to ItemList::filter() is not callable.'
 			);
 		}
