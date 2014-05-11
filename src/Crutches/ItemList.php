@@ -80,12 +80,19 @@ class ItemList {
 	 * added to the start and end of each item in the list.
 	 *
 	 * @param string $string The string to add
+     * @param bool $in_place Whether to surround values in place of the current list
 	 */
-	public function surround($string) {
-		foreach ($this->list as &$value) {
-			$value = $string . $value . $string;
-		}
-		return $this;
+	public function surround($string, $in_place = false) {
+        $surround = array_map(function($value) use ($string) {
+			return $string . $value . $string;
+        }, $this->list);
+
+        if ($in_place) {
+            $this->list = $surround;
+            return $this;
+        }
+
+		return new ItemList($surround);
 	}
 
 	/**
@@ -136,7 +143,8 @@ class ItemList {
 	/**
 	 * Map $callback over all items in this list.
 	 *
-	 * @param callable $callback The function to map over each item.
+	 * @param callable $callback The function to map over each item
+     * @param bool $in_place Whether to map in place of the current list
 	 */
 	public function map($callback, $in_place = false) {
 		if(!is_callable($callback)) {
@@ -160,6 +168,7 @@ class ItemList {
 	 * reset after filtering.
 	 *
 	 * @param callable $callback The function to filter the list.
+     * @param bool $in_place Whether to filter in place of the current list
 	 */
 	public function filter($callback, $in_place = false) {
 		if(!is_callable($callback)) {

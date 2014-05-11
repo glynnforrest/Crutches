@@ -46,8 +46,10 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSurround() {
 		$l = new ItemList(array('one', 'two', 'three'));
-		$this->assertInstanceOf('\Crutches\ItemList', $l->surround('$'));
-		$this->assertSame(array('$one$', '$two$', '$three$'), $l->getList());
+        $surrounded = $l->surround('$');
+        $this->assertInstanceOf('\Crutches\ItemList', $surrounded);
+        $this->assertNotSame($l, $surrounded);
+        $this->assertSame(array('$one$', '$two$', '$three$'), $surrounded->getList());
 	}
 
 	public function stringifyProvider() {
