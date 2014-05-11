@@ -169,4 +169,25 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $this->assertSame($new_list, $taken->getList());
     }
 
+    public function invalidTakeProvider()
+    {
+        return array(
+            array(true),
+            array(false),
+            array(new \stdClass()),
+            array(array()),
+            array('foo')
+        );
+    }
+
+    /**
+     * @dataProvider invalidTakeProvider()
+     */
+    public function testTakeThrowsException()
+    {
+        $l = new ItemList(array('foo', 'bar'));
+        $this->setExpectedException('\InvalidArgumentException');
+        $l->take(true);
+    }
+
 }
