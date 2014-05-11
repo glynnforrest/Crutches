@@ -144,8 +144,7 @@ class ItemList {
 				'Argument passed to ItemList::map() is not callable.'
 			);
 		}
-		$this->list = array_map($callback, $this->list);
-		return $this;
+		return new ItemList(array_map($callback, $this->list));
 	}
 
 	/**
@@ -160,8 +159,7 @@ class ItemList {
 				'Argument passed to ItemList::filter() is not callable.'
 			);
 		}
-		$this->list = array_values(array_filter($this->list, $callback));
-		return $this;
+		return new ItemList(array_values(array_filter($this->list, $callback)));
 	}
 
     /**

@@ -121,8 +121,10 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$f = function($value) {
 			return ucfirst($value);
 		};
-		$this->assertInstanceOf('\Crutches\ItemList', $l->map($f));
-		$this->assertSame('Foo', $l->get(0));
+        $mapped = $l->map($f);
+		$this->assertInstanceOf('\Crutches\ItemList', $mapped);
+        $this->assertNotSame($l, $mapped);
+		$this->assertSame('Foo', $mapped->get(0));
 	}
 
 	public function testMapThrowsException() {
@@ -136,8 +138,10 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$f = function($value) {
 			return $value % 2 == 0;
 		};
-		$this->assertInstanceOf('\Crutches\ItemList', $l->filter($f));
-		$this->assertSame(array(0, 2, 4), $l->getList());
+        $filtered = $l->filter($f);
+		$this->assertInstanceOf('\Crutches\ItemList', $filtered);
+        $this->assertNotSame($l, $filtered);
+		$this->assertSame(array(0, 2, 4), $filtered->getList());
 	}
 
 	public function testFilterThrowsException() {
