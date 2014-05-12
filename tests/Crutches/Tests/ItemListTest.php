@@ -38,11 +38,21 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame(array('$one', '$two', '$three'), $l->getList());
 	}
 
-	public function testSuffix() {
-		$l = new ItemList(array('one', 'two', 'three'));
-		$this->assertInstanceOf('\Crutches\ItemList', $l->suffix('$'));
-		$this->assertSame(array('one$', 'two$', 'three$'), $l->getList());
-	}
+    public function testSuffix() {
+        $l = new ItemList(array('one', 'two', 'three'));
+        $suffixed = $l->suffix('$');
+        $this->assertInstanceOf('Crutches\ItemList', $suffixed);
+        $this->assertNotSame($l, $suffixed);
+        $this->assertSame(array('one$', 'two$', 'three$'), $suffixed->getList());
+    }
+
+    public function testSuffixInPlace()
+    {
+        $l = new ItemList(array('one', 'two', 'three'));
+        $suffixed = $l->suffix('$', true);
+        $this->assertSame($l, $suffixed);
+        $this->assertSame(array('one$', 'two$', 'three$'), $suffixed->getList());
+    }
 
 	public function testSurround() {
 		$l = new ItemList(array('one', 'two', 'three'));
@@ -51,6 +61,14 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotSame($l, $surrounded);
         $this->assertSame(array('$one$', '$two$', '$three$'), $surrounded->getList());
 	}
+
+    public function testSurroundInPlace()
+    {
+        $l = new ItemList(array('one', 'two', 'three'));
+        $surrounded = $l->surround('$', true);
+        $this->assertSame($l, $surrounded);
+        $this->assertSame(array('$one$', '$two$', '$three$'), $surrounded->getList());
+    }
 
 	public function stringifyProvider() {
 		return array(

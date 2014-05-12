@@ -63,17 +63,23 @@ class ItemList {
 		return $this;
 	}
 
-	/**
-	 * Add $string to the end of each value in the list.
-	 *
-	 * @param string $string The string to add
-	 */
-	public function suffix($string) {
-		foreach ($this->list as &$value) {
-			$value = $value . $string;
-		}
-		return $this;
-	}
+    /**
+     * Add $string to the end of each value in the list.
+     *
+     * @param string $string The string to add
+     */
+    public function suffix($string, $in_place = false) {
+        $suffixed = array_map(function($value) use ($string) {
+            return $value . $string;
+        }, $this->list);
+
+        if ($in_place) {
+            $this->list = $suffixed;
+            return $this;
+        }
+
+        return new ItemList($suffixed);
+    }
 
 	/**
 	 * Surround each value in the list with a string. $string will be
