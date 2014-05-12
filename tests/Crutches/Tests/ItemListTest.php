@@ -219,6 +219,18 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $l = new ItemList($original_list);
         $taken = $l->take($amount);
         $this->assertInstanceOf('Crutches\ItemList', $taken);
+        $this->assertNotSame($l, $taken);
+        $this->assertSame($new_list, $taken->getList());
+    }
+
+    /**
+     * @dataProvider takeProvider()
+     */
+    public function testTakeInPlace($original_list, $amount, $new_list)
+    {
+        $l = new ItemList($original_list);
+        $taken = $l->take($amount, true);
+        $this->assertSame($l, $taken);
         $this->assertSame($new_list, $taken->getList());
     }
 

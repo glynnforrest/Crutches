@@ -201,22 +201,29 @@ class ItemList {
 	}
 
     /**
-     * Take a number of elements from the start of this ItemList and
-     * return a new ItemList instance with those values.
+     * Take a number of elements from the start of this ItemList.
      *
      * If amount is negative, elements will be taken up until that
      * many elements from the end of the array.
      *
      * @param int $amount The amount of elements to take
-     * @return ItemList A new ItemList instance with the selected elements
+     * @param bool $in_place Replace the current list if true, return a new instance if false
+     * @return ItemList An ItemList instance with the selected elements
      */
-    public function take($amount)
+    public function take($amount, $in_place = false)
     {
         if (!is_int($amount)) {
             throw new \InvalidArgumentException('ItemList#take() expects an integer argument');
         }
 
-        return new ItemList(array_slice($this->list, 0, $amount));
+        $taken = array_slice($this->list, 0, $amount);
+
+        if ($in_place) {
+            $this->list = $taken;
+            return $this;
+        }
+
+        return new ItemList($taken);
     }
 
     /**
