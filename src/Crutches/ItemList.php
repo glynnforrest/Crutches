@@ -227,6 +227,33 @@ class ItemList {
     }
 
     /**
+     * Take a number of random elements from this ItemList.
+     *
+     * @param int $amount The amount of elements to take
+     * @param bool $in_place Replace the current list if true, return a new instance if false
+     * @return ItemList An ItemList instance with the selected elements
+     */
+    public function takeRandom($amount, $in_place = false)
+    {
+        if (!is_int($amount)) {
+            throw new \InvalidArgumentException('ItemList#take() expects an integer argument');
+        }
+
+        $keys = (array) array_rand($this->list, $amount);
+
+        $taken = array_map(function($key) {
+            return $this->list[$key];
+        }, $keys);
+
+        if ($in_place) {
+            $this->list = $taken;
+            return $this;
+        }
+
+        return new ItemList($taken);
+    }
+
+    /**
      * Shuffle the list.
      *
      * @param bool $in_place Replace the current list if true, return a new instance if false

@@ -275,4 +275,23 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $this->assertSame(array('baz', 'foo', 'quo', 'bar'), $shuffled->getList());
     }
 
+    public function testTakeRandom()
+    {
+        $l = new ItemList(array('foo', 'bar', 'baz', 'quo'));
+        srand(0);
+        $taken = $l->takeRandom(1);
+        $this->assertInstanceOf('Crutches\ItemList', $taken);
+        $this->assertNotSame($l, $taken);
+        $this->assertSame(array('baz'), $taken->getList());
+    }
+
+    public function testTakeRandomInPlace()
+    {
+        $l = new ItemList(array('foo', 'bar', 'baz', 'quo'));
+        srand(0);
+        $taken = $l->takeRandom(1, true);
+        $this->assertSame($l, $taken);
+        $this->assertSame(array('baz'), $taken->getList());
+    }
+
 }
