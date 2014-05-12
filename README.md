@@ -7,12 +7,6 @@
 
 Crutches is a collection of utility classes for PHP for every day problems, such as dealing with strings, numbers, arrays and words.
 
-### Classes included in Crutches
-
-* DotArray for working with arrays using dot notation.
-* An Inflector for working with plurals, with support for different languages.
-
-
 ## Installation
 
 Crutches is installed via Composer. To add it to your project, simply add it to your
@@ -20,7 +14,7 @@ composer.json file:
 
 	{
 		"require": {
-			"glynnforrest/crutches": "*"
+			"glynnforrest/crutches": "0.2.*"
 		}
 	}
 
