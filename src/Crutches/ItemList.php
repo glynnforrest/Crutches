@@ -51,22 +51,30 @@ class ItemList {
 		return isset($this->list[$index]) ? $this->list[$index] : null;
 	}
 
-	/**
-	 * Add $string to the start of each value in the list.
-	 *
-	 * @param string $string The string to add
-	 */
-	public function prefix($string) {
-		foreach ($this->list as &$value) {
-			$value = $string . $value;
-		}
-		return $this;
-	}
+    /**
+     * Add $string to the start of each value in the list.
+     *
+     * @param string $string The string to add
+     * @param bool $in_place Whether to replace the current list
+     */
+    public function prefix($string, $in_place = false) {
+        $prefixed = array_map(function($value) use ($string) {
+            return $string . $value;
+        }, $this->list);
+
+        if ($in_place) {
+            $this->list = $prefixed;
+            return $this;
+        }
+
+        return new ItemList($prefixed);
+    }
 
     /**
      * Add $string to the end of each value in the list.
      *
      * @param string $string The string to add
+     * @param bool $in_place Whether to replace the current list
      */
     public function suffix($string, $in_place = false) {
         $suffixed = array_map(function($value) use ($string) {
@@ -86,7 +94,7 @@ class ItemList {
 	 * added to the start and end of each item in the list.
 	 *
 	 * @param string $string The string to add
-     * @param bool $in_place Whether to surround values in place of the current list
+     * @param bool $in_place Whether to replace the current list
 	 */
 	public function surround($string, $in_place = false) {
         $surround = array_map(function($value) use ($string) {
@@ -150,7 +158,7 @@ class ItemList {
 	 * Map $callback over all items in this list.
 	 *
 	 * @param callable $callback The function to map over each item
-     * @param bool $in_place Whether to map in place of the current list
+     * @param bool $in_place Whether to replace the current list
 	 */
 	public function map($callback, $in_place = false) {
 		if(!is_callable($callback)) {
@@ -174,7 +182,7 @@ class ItemList {
 	 * reset after filtering.
 	 *
 	 * @param callable $callback The function to filter the list.
-     * @param bool $in_place Whether to filter in place of the current list
+     * @param bool $in_place Whether to replace the current list
 	 */
 	public function filter($callback, $in_place = false) {
 		if(!is_callable($callback)) {

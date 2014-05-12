@@ -32,11 +32,21 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame(array('one', 'two'), $l->getList());
 	}
 
-	public function testPrefix() {
-		$l = new ItemList(array('one', 'two', 'three'));
-		$this->assertInstanceOf('\Crutches\ItemList', $l->prefix('$'));
-		$this->assertSame(array('$one', '$two', '$three'), $l->getList());
-	}
+    public function testPrefix() {
+        $l = new ItemList(array('one', 'two', 'three'));
+        $prefixed = $l->prefix('$');
+        $this->assertInstanceOf('Crutches\ItemList', $prefixed);
+        $this->assertNotSame($l, $prefixed);
+        $this->assertSame(array('$one', '$two', '$three'), $prefixed->getList());
+    }
+
+    public function testPrefixInPlace()
+    {
+        $l = new ItemList(array('one', 'two', 'three'));
+        $prefixed = $l->prefix('$', true);
+        $this->assertSame($l, $prefixed);
+        $this->assertSame(array('$one', '$two', '$three'), $prefixed->getList());
+    }
 
     public function testSuffix() {
         $l = new ItemList(array('one', 'two', 'three'));
