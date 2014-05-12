@@ -219,4 +219,22 @@ class ItemList {
         return new ItemList(array_slice($this->list, 0, $amount));
     }
 
+    /**
+     * Shuffle the list.
+     *
+     * @param bool $in_place Replace the current list if true, return a new instance if false
+     */
+    public function shuffle($in_place = false)
+    {
+        if ($in_place) {
+            shuffle($this->list);
+            return $this;
+        }
+
+        $shuffled = $this->list;
+        shuffle($shuffled);
+
+        return new ItemList($shuffled);
+    }
+
 }

@@ -243,4 +243,24 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $l->take(true);
     }
 
+    public function testShuffle()
+    {
+        $l = new ItemList(array('foo', 'bar', 'baz', 'quo'));
+        srand(0);
+        $shuffled = $l->shuffle();
+        $this->assertInstanceOf('Crutches\ItemList', $shuffled);
+        $this->assertNotSame($l, $shuffled);
+        $this->assertSame(array('baz', 'foo', 'quo', 'bar'), $shuffled->getList());
+        $this->assertSame(array('foo', 'bar', 'baz', 'quo'), $l->getList());
+    }
+
+    public function testShuffleInPlace()
+    {
+        $l = new ItemList(array('foo', 'bar', 'baz', 'quo'));
+        srand(0);
+        $shuffled = $l->shuffle(true);
+        $this->assertSame($l, $shuffled);
+        $this->assertSame(array('baz', 'foo', 'quo', 'bar'), $shuffled->getList());
+    }
+
 }
