@@ -1,6 +1,17 @@
 Changelog
 =========
 
+### 0.2.1 12th May 2014
+
+Major improvements in the ItemList class.
+
+* All ItemList methods have the option to either return a new ItemList
+  instance or edit the current list. The default is to return a new
+  instance to reduce side effects.
+* Adding a MutableItemList that changes the current list by default.
+* Adding ItemList takeRandom().
+* Adding ItemList shuffle().
+
 ### 0.2.0 31st December 2013
 
 * Adding the Bitmask class for working with a bitwise value system (e.g. user permissions).
