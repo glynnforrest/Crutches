@@ -13,13 +13,6 @@ include(__DIR__ . '/../../bootstrap.php');
  **/
 class ItemListTest extends \PHPUnit_Framework_TestCase {
 
-	public function testConstruct() {
-		$l1 = new ItemList();
-		$this->assertInstanceOf('Crutches\ItemList', $l1);
-		$l2= new ItemList(array());
-		$this->assertInstanceOf('Crutches\ItemList', $l2);
-	}
-
 	public function testCreate() {
 		$l1 = ItemList::create();
 		$this->assertInstanceOf('Crutches\ItemList', $l1);
