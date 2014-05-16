@@ -3,9 +3,19 @@
 
 [![Build Status](https://travis-ci.org/glynnforrest/Crutches.png)](https://travis-ci.org/glynnforrest/Crutches)
 
-## Intro
+Included classes:
 
-Crutches is a collection of utility classes for PHP for every day problems, such as dealing with strings, numbers, arrays and words.
+* DotArray - Set and get values from complex array structures easily.
+* ItemList - Manipulate a list of objects (arrays with numeric
+  keys). Methods are inspired by functional concepts such as map,
+  filter and take. All methods that operate on the list return a new
+  instance, leaving the original list unchanged.
+* MutableItemList - The same as ItemList, except all methods modify
+  the object instead of returning a new instance.
+* Bitmask - A series of flags used to represent a group of properties
+  (e.g. user permissions).
+
+See the docs/ directory for detailed usage on each.
 
 ## Installation
 
@@ -23,7 +33,6 @@ And run composer to update your dependencies:
 	$ curl -s http://getcomposer.org/installer | php
 	$ php composer.phar update
 
+## License
 
-## Usage
-
-Coming soon.
+MIT
