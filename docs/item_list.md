@@ -58,7 +58,7 @@ $list->get(int $index)
 Get an element at the specific index or null if the index is out of
 range. Like arrays, the list is zero-indexed.
 
-    $list = new ItemList(array('one', 'two'));
+    $list = new ItemList(array('foo', 'bar'));
     echo $list->get(1);
     // bar
 
