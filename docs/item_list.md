@@ -94,3 +94,39 @@ Append and prepend a string to all elements.
     $list = new ItemList(array('one', 'two'));
     print_r($list->surround(':')->getList());
     // array(':one:', ':two:')
+
+### stringify
+
+    $list->stringify(string $delimeter = ', ', string $prefix = '', string $suffix = '')
+
+Get the list as a string, separating each value with $delimeter. If
+supplied, $prefix and $suffix will be added to each value. The list is
+not modified.
+
+    $list = new ItemList(array('one', 'two', 'three'));
+    echo $list->stringify();
+    // one, two, three
+
+    echo $list->stringify(', ', 'item ', '!');
+    // item one!, item two!, item three!
+
+### ___toString
+
+When cast to a string, an ItemList returns the result of stringify().
+
+    echo new ItemList(array('foo', 'bar'));
+    // foo, bar
+
+### human
+
+    $list->human(string $ending = ' and')
+
+A variation on stringify() that adds a different delimeter at the end
+for nicer reading.
+
+    $list = new ItemList(array('good', 'quick', 'cheap'));
+    echo $list->human();
+    // good, quick and cheap
+
+    echo $list->human(', or');
+    // good, quick, or cheap
