@@ -130,3 +130,58 @@ for nicer reading.
 
     echo $list->human(', or');
     // good, quick, or cheap
+
+### map
+
+    $list->map($callback, $in_place = false)
+
+Map a function over all items in the list.
+
+    $list = new ItemList(array('fOo', 'BaR', 'bAz'));
+    print_r($list->map('strtolower')->getList());
+    // array('foo', 'bar', 'baz');
+
+### filter
+
+    $list->filter($callback, $in_place = false)
+
+Use a function to filter items from the list.
+
+    $list = new ItemList(array(1, 2.2, 3.3, 4));
+    print_r($list->filter('is_int)->getList());
+    // array(1, 4);
+
+### take
+
+    $list->take(int $amount, $in_place = false);
+
+Take a specified amount of elements from the start of the list.
+
+    $list = new ItemList(array('foo', 'bar', 'baz', 'quo'));
+    print_r($list->take(2)->getList());
+    // array('foo', 'bar')
+
+### takeRandom
+
+    $list->takeRandom(int $amount, $in_place = false);
+
+Take a specified amount of elements randomly from the list.
+
+    $list = new ItemList(array('good', 'quick', 'cheap'));
+    print_r($list->takeRandom(2)->getList());
+    // array('good', 'cheap');
+
+### shuffle
+
+    $list->shuffle($in_place = false);
+
+Shuffle the list and return a new instance.
+
+    $list = new ItemList(array('foo', 'bar'));
+    $shuffled = $list->shuffle();
+
+    print_r($list->getList());
+    // array('foo', 'bar');
+
+    print_r($shuffled->getList());
+    // array('bar, 'foo);
