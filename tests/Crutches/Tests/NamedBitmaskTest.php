@@ -53,6 +53,13 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($mask->hasFlag(array('ADMIN', 'MODERATOR')));
     }
 
+    public function testHasFlagUnknown()
+    {
+        $mask = new NamedBitmask(array('ADMIN', 'MODERATOR'));
+        $this->setExpectedException('\Exception', 'Named flag not found: "USER"');
+        $mask->hasFlag('USER');
+    }
+
     public function testAddFlag()
     {
         $mask = new NamedBitmask(array('ADMIN', 'MODERATOR', 'EDITOR'));
@@ -63,6 +70,13 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(7, $mask->getBitmask());
     }
 
+    public function testAddFlagUnknown()
+    {
+        $mask = new NamedBitmask(array('ADMIN', 'MODERATOR'));
+        $this->setExpectedException('\Exception', 'Named flag not found: "USER"');
+        $mask->addFlag('USER');
+    }
+
     public function testRemoveFlag()
     {
         $mask = new NamedBitmask(array('ADMIN', 'MODERATOR', 'EDITOR'), 7);
@@ -71,6 +85,13 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(6, $mask->getBitmask());
         $this->assertSame($mask, $mask->removeFlag(array('MODERATOR', 'EDITOR')));
         $this->assertSame(0, $mask->getBitmask());
+    }
+
+    public function testRemoveFlagUnknown()
+    {
+        $mask = new NamedBitmask(array('ADMIN', 'MODERATOR'));
+        $this->setExpectedException('\Exception', 'Named flag not found: "USER"');
+        $mask->removeFlag('USER');
     }
 
 }

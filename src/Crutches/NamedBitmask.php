@@ -86,7 +86,7 @@ class NamedBitmask
         $mask = 0;
         foreach ($flags as $flag) {
             if (!isset($this->names[$flag])) {
-                return false;
+                throw new \Exception(sprintf('Named flag not found: "%s"', $flag));
             }
             $mask = $mask | $this->names[$flag];
         }
