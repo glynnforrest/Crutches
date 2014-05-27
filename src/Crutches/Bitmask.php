@@ -21,7 +21,7 @@ class Bitmask {
 	}
 
 	/**
-	 * Get the bitmask held in this Bitmask instance.
+	 * Get the bitmask value.
 	 *
 	 * @return int The bitmask
 	 */
@@ -30,7 +30,7 @@ class Bitmask {
 	}
 
 	/**
-	 * Set the bitmask held in this Bitmask instance.
+	 * Set the bitmask value.
 	 *
 	 * @param int $bitmask The bitmask
 	 * @return Crutches\Bitmask This Bitmask instance
@@ -41,7 +41,7 @@ class Bitmask {
 	}
 
 	/**
-	 * Check if this Bitmask contains a given flag.
+	 * Check if the Bitmask contains a given flag.
 	 *
 	 * Check more than one flag at a time by separating individual
 	 * flags with |. For example, supplying 4 | 1 will check for both
@@ -55,7 +55,7 @@ class Bitmask {
 	}
 
 	/**
-	 * Add a flag to this Bitmask.
+	 * Add a flag to the Bitmask.
 	 *
 	 * Add more than one flag at a time by separating individual
 	 * flags with |. For example, supplying 4 | 1 will add both 4
@@ -70,7 +70,7 @@ class Bitmask {
 	}
 
 	/**
-	 * Remove a flag from this Bitmask.
+	 * Remove a flag from the Bitmask.
 	 *
 	 * Remove more than one flag at a time by separating individual
 	 * flags with |. For example, supplying 4 | 1 will remove both 4
