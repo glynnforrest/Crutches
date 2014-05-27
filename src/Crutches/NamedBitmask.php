@@ -15,7 +15,8 @@ class NamedBitmask
     /**
      * Create a new Bitmask instance.
      *
-     * @param int $bitmask The bitmask
+     * @param array $name    An array of named flags
+     * @param int   $bitmask The bitmask
      */
     public function __construct(array $names, $bitmask = 0)
     {
@@ -24,7 +25,7 @@ class NamedBitmask
     }
 
     /**
-     * Get the bitmask held in this Bitmask instance.
+     * Get the bitmask value.
      *
      * @return int The bitmask
      */
@@ -34,7 +35,7 @@ class NamedBitmask
     }
 
     /**
-     * Set the bitmask held in this Bitmask instance.
+     * Set the bitmask value.
      *
      * @param  int                   $bitmask The bitmask
      * @return Crutches\NamedBitmask This NamedBitmask instance
@@ -95,7 +96,7 @@ class NamedBitmask
     }
 
     /**
-     * Check if this Bitmask contains a given flag.
+     * Check if the NamedBitmask contains a given flag.
      *
      * Check more than one flag at a time by separating individual
      * flags with |. For example, supplying 4 | 1 will check for both
@@ -112,7 +113,7 @@ class NamedBitmask
     }
 
     /**
-     * Add a flag to this Bitmask.
+     * Add a flag to the NamedBitmask.
      *
      * Add more than one flag at a time by separating individual
      * flags with |. For example, supplying 4 | 1 will add both 4
@@ -129,7 +130,7 @@ class NamedBitmask
     }
 
     /**
-     * Remove a flag from this Bitmask.
+     * Remove a flag from the NamedBitmask.
      *
      * Remove more than one flag at a time by separating individual
      * flags with |. For example, supplying 4 | 1 will remove both 4
