@@ -153,10 +153,10 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
     public function testMapInPlace()
     {
         $l = new ItemList(array('foo', 'bar'));
-        $walked = $l->map('strtoupper', true);
-        $this->assertInstanceOf('Crutches\ItemList', $walked);
-        $this->assertSame($l, $walked);
-        $this->assertSame('FOO', $walked->get(0));
+        $mapped = $l->map('strtoupper', true);
+        $this->assertInstanceOf('Crutches\ItemList', $mapped);
+        $this->assertSame($l, $mapped);
+        $this->assertSame('FOO', $mapped->get(0));
     }
 
 	public function testMapThrowsException() {
@@ -282,6 +282,40 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
         $taken = $l->takeRandom(2, true);
         $this->assertSame($l, $taken);
         $this->assertTrue(count($taken->getList()) === 2);
+    }
+
+    public function sliceProvider()
+    {
+        return array(
+            array(array('foo', 'bar', 'baz'), 1, 2, array('bar', 'baz')),
+            array(array('foo'), 2, 2, array()),
+            array(array('foo', 'bar'), 3, 0, array()),
+            array(array('foo', 'bar', 'baz'), -1, 1, array('baz')),
+            array(array('foo', 'bar', 'baz'), -4, 4, array('foo', 'bar', 'baz'))
+        );
+    }
+
+    /**
+     * @dataProvider sliceProvider()
+     */
+    public function testSlice($original_list, $offset, $length, $new_list)
+    {
+        $l = new ItemList($original_list);
+        $sliced = $l->slice($offset, $length);
+        $this->assertInstanceOf('Crutches\ItemList', $sliced);
+        $this->assertNotSame($l, $sliced);
+        $this->assertSame($new_list, $sliced->getList());
+    }
+
+    /**
+     * @dataProvider sliceProvider()
+     */
+    public function testSliceInPlace($original_list, $offset, $length, $new_list)
+    {
+        $l = new ItemList($original_list);
+        $sliced = $l->slice($offset, $length, true);
+        $this->assertSame($l, $sliced);
+        $this->assertSame($new_list, $sliced->getList());
     }
 
 }

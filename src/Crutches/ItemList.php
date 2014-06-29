@@ -271,4 +271,26 @@ class ItemList {
         return new ItemList($shuffled);
     }
 
+    /**
+     * Extract a slice from the list. The $offset and $length
+     * variables have the same properties as they do in array_slice().
+     *
+     * @param int $offset The start of the slice
+     * @param int $length The length of the slice
+     * @param bool $in_place Replace the current list if true, return a new instance if false
+     * @return ItemList An ItemList instance with the selected elements
+     */
+    public function slice($offset, $length, $in_place = false)
+    {
+        if ($in_place) {
+            $this->list = array_slice($this->list, $offset, $length);
+
+            return $this;
+        }
+
+        $slice = array_slice($this->list, $offset, $length);
+
+        return new ItemList($slice);
+    }
+
 }
