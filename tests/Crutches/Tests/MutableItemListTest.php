@@ -96,4 +96,26 @@ class MutableItemListTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($taken->getList()) === 2);
     }
 
+    public function sliceProvider()
+    {
+        return array(
+            array(array('foo', 'bar', 'baz'), 1, 2, array('bar', 'baz')),
+            array(array('foo'), 2, 2, array()),
+            array(array('foo', 'bar'), 3, 0, array()),
+            array(array('foo', 'bar', 'baz'), -1, 1, array('baz')),
+            array(array('foo', 'bar', 'baz'), -4, 4, array('foo', 'bar', 'baz'))
+        );
+    }
+
+    /**
+     * @dataProvider sliceProvider()
+     */
+    public function testSlice($original_list, $offset, $length, $new_list)
+    {
+        $l = new MutableItemList($original_list);
+        $sliced = $l->slice($offset, $length);
+        $this->assertSame($l, $sliced);
+        $this->assertSame($new_list, $sliced->getList());
+    }
+
 }

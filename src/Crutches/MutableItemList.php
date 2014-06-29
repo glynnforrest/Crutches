@@ -50,4 +50,9 @@ class MutableItemList extends ItemList
         return parent::shuffle($in_place);
     }
 
+    public function slice($offset, $length, $in_place = true)
+    {
+        return parent::slice($offset, $length, $in_place);
+    }
+
 }
