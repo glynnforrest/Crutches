@@ -239,11 +239,11 @@ class ItemList {
             throw new \InvalidArgumentException('ItemList#take() expects an integer argument');
         }
 
-        $keys = (array) array_rand($this->list, $amount);
-
-        $taken = array_map(function($key) {
-            return $this->list[$key];
-        }, $keys);
+        $taken = array();
+        while ($amount > 0) {
+            $taken[] = $this->list[array_rand($this->list)];
+            $amount--;
+        }
 
         if ($in_place) {
             $this->list = $taken;

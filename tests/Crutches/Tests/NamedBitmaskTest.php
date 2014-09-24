@@ -30,6 +30,12 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('ADMIN'), $mask->getNames());
     }
 
+    public function testSetAndGetEmptyNames()
+    {
+        $mask = new NamedBitmask(array());
+        $this->assertSame(array(), $mask->getNames());
+    }
+
     public function testHasFlag()
     {
         $mask = new NamedBitmask(array('ADMIN', 'MODERATOR'), 0);

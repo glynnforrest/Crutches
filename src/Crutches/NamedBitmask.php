@@ -10,7 +10,7 @@ namespace Crutches;
 class NamedBitmask
 {
     protected $bitmask;
-    protected $names;
+    protected $names = array();
 
     /**
      * Create a new Bitmask instance.
@@ -72,11 +72,16 @@ class NamedBitmask
         //of 3 will have values of 1, 2 and 4
         $bits = array();
         $bit = 1;
-        for ($i = 0; $i < count($names); $i++) {
+        $count = count($names);
+        for ($i = 0; $i < $count; $i++) {
             $bits[] = $bit;
             $bit *= 2;
         }
-        $this->names = array_combine($names, $bits);
+
+        //necessary for 5.3 array_combine with empty arrays
+        if ($count > 0) {
+            $this->names = array_combine($names, $bits);
+        }
 
         return $this;
     }
