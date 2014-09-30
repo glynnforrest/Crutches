@@ -4,8 +4,6 @@ namespace Crutches\Tests\Inflector;
 
 use Crutches\Inflector\EN;
 
-include(__DIR__ . '/../../../bootstrap.php');
-
 /**
  * ENTest
  *

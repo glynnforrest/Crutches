@@ -2,8 +2,6 @@
 
 namespace Crutches\Tests;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 use Crutches\NamedBitmask;
 
 /**

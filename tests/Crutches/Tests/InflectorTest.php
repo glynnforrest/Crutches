@@ -4,8 +4,6 @@ namespace Crutches\Tests;
 
 use Crutches\Inflector;
 
-include(__DIR__ . '/../../bootstrap.php');
-
 /**
  * InflectorTest
  *

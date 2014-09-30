@@ -4,8 +4,6 @@ namespace Crutches\Tests;
 
 use Crutches\Bitmask;
 
-include (__DIR__ . '/../../bootstrap.php');
-
 /**
  * BitmaskTest
  *

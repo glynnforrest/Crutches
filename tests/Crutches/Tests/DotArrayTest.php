@@ -4,8 +4,6 @@ namespace Crutches\Tests;
 
 use Crutches\DotArray;
 
-include(__DIR__ . '/../../bootstrap.php');
-
 /**
  * DotArrayTest
  *

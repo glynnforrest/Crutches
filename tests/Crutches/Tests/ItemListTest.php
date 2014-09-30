@@ -4,8 +4,6 @@ namespace Crutches\Tests;
 
 use Crutches\ItemList;
 
-include(__DIR__ . '/../../bootstrap.php');
-
 /**
  * ItemListTest
  *
