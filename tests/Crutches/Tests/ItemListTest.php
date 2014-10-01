@@ -239,11 +239,66 @@ class ItemListTest extends \PHPUnit_Framework_TestCase {
     /**
      * @dataProvider invalidTakeProvider()
      */
-    public function testTakeThrowsException()
+    public function testTakeThrowsException($argument)
     {
         $l = new ItemList(array('foo', 'bar'));
         $this->setExpectedException('\InvalidArgumentException');
-        $l->take(true);
+        $l->take($argument);
+    }
+
+    public function dropProvider()
+    {
+        return array(
+            array(array('foo', 'bar', 'baz'), 1, array('bar', 'baz')),
+            array(array('foo', 'bar', 'baz'), 2, array('baz')),
+            array(array('foo'), 2, array()),
+            array(array('foo', 'bar'), 0, array('foo', 'bar'))
+        );
+    }
+
+    /**
+     * @dataProvider dropProvider()
+     */
+    public function testDrop($original_list, $amount, $new_list)
+    {
+        $l = new ItemList($original_list);
+        $remaining = $l->drop($amount);
+        $this->assertInstanceOf('Crutches\ItemList', $remaining);
+        $this->assertNotSame($l, $remaining);
+        $this->assertSame($new_list, $remaining->getList());
+    }
+
+    /**
+     * @dataProvider dropProvider()
+     */
+    public function testDropInPlace($original_list, $amount, $new_list)
+    {
+        $l = new ItemList($original_list);
+        $remaining = $l->drop($amount, true);
+        $this->assertSame($l, $remaining);
+        $this->assertSame($new_list, $remaining->getList());
+    }
+
+    public function invalidDropProvider()
+    {
+        return array(
+            array(true),
+            array(false),
+            array(new \stdClass()),
+            array(array()),
+            array('foo'),
+            array(-1)
+        );
+    }
+
+    /**
+     * @dataProvider invalidDropProvider()
+     */
+    public function testDropThrowsException($argument)
+    {
+        $l = new ItemList(array('foo', 'bar'));
+        $this->setExpectedException('\InvalidArgumentException');
+        $l->drop($argument);
     }
 
     public function testShuffle()

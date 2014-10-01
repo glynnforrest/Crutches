@@ -254,6 +254,29 @@ class ItemList {
     }
 
     /**
+     * Remove a number of elements from the start of this ItemList.
+     *
+     * @param int $amount The amount of elements to remove
+     * @param bool $in_place Replace the current list if true, return a new instance if false
+     * @return ItemList An ItemList excluding the dropped elements
+     */
+    public function drop($amount, $in_place = false)
+    {
+        if (!is_int($amount) || $amount < 0) {
+            throw new \InvalidArgumentException('ItemList#drop() expects a positive integer argument');
+        }
+
+        $remaining = array_slice($this->list, $amount);
+
+        if ($in_place) {
+            $this->list = $remaining;
+            return $this;
+        }
+
+        return new ItemList($remaining);
+    }
+
+    /**
      * Shuffle the list.
      *
      * @param bool $in_place Replace the current list if true, return a new instance if false
