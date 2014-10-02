@@ -45,6 +45,11 @@ class MutableItemList extends ItemList
         return parent::takeRandom($amount, $in_place);
     }
 
+    public function drop($amount, $in_place = true)
+    {
+        return parent::drop($amount, $in_place);
+    }
+
     public function shuffle($in_place = true)
     {
         return parent::shuffle($in_place);
