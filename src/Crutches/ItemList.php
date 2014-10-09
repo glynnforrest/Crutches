@@ -120,7 +120,7 @@ class ItemList {
 	 */
 	public function stringify($delimeter = ', ', $prefix = '', $suffix = '') {
 		if(empty($this->list)) {
-			return null;
+            return '';
 		}
 		$string = '';
 		foreach($this->list as $value) {
@@ -143,7 +143,7 @@ class ItemList {
 	 */
 	public function human($ending = ' and') {
 		if(empty($this->list)) {
-			return null;
+            return '';
 		}
 		$string = '';
 		foreach($this->list as $value) {

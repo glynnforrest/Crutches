@@ -100,7 +100,6 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     {
         $l = $this->newInstance(array('foo', 'bar', 'baz'));
         $string = $l->stringify($delimeter, $prefix, $suffix);
-        $this->assertInternalType('string', $string);
         $this->assertSame($expected, $string);
     }
 
@@ -108,7 +107,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     {
         $l = $this->newInstance();
         $string = $l->stringify();
-        $this->assertNull($string);
+        $this->assertSame('', $string);
     }
 
     public function testToStringCallsStringify()
@@ -138,8 +137,8 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testHumanEmptyList()
     {
         $l = $this->newInstance();
-        $this->assertNull($l->human());
-        $this->assertNull($l->human(', or'));
+        $this->assertSame('', $l->human());
+        $this->assertSame('', $l->human(', or'));
     }
 
     public function testGet()
