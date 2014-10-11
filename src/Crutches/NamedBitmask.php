@@ -3,7 +3,7 @@
 namespace Crutches;
 
 /**
- * Bitmask
+ * NamedBitmask
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
@@ -103,9 +103,7 @@ class NamedBitmask
     /**
      * Check if the NamedBitmask contains a given flag.
      *
-     * Check more than one flag at a time by separating individual
-     * flags with |. For example, supplying 4 | 1 will check for both
-     * 4 and 1, and will pass only if both 4 and 1 are present.
+     * Check more than one flag at a time by passing flags as an array.
      *
      * @param  mixed $flags The flag to check as a string, or multiple flags as an array
      * @return bool  The result of the check
@@ -120,9 +118,7 @@ class NamedBitmask
     /**
      * Add a flag to the NamedBitmask.
      *
-     * Add more than one flag at a time by separating individual
-     * flags with |. For example, supplying 4 | 1 will add both 4
-     * and 1.
+     * Add more than one flag at a time by passing flags as an array.
      *
      * @param  mixed            $flags The flag to add as a string, or multiple flags as an array
      * @return Crutches\Bitmask This Bitmask instance
@@ -137,9 +133,7 @@ class NamedBitmask
     /**
      * Remove a flag from the NamedBitmask.
      *
-     * Remove more than one flag at a time by separating individual
-     * flags with |. For example, supplying 4 | 1 will remove both 4
-     * and 1.
+     * Remove more than one flag at a time by passing flags as an array.
      *
      * @param  mixed            $flags The flag to remove as a string, or multiple flags as an array
      * @return Crutches\Bitmask This Bitmask instance
