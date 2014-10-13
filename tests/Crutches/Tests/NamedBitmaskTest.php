@@ -98,4 +98,17 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
         $mask->removeFlag('USER');
     }
 
+    public function testGetFlags()
+    {
+        $mask = new NamedBitmask(array('CAN_VIEW', 'CAN_CREATE', 'CAN_EDIT', 'CAN_DELETE'));
+        $this->assertSame(array(), $mask->getFlags());
+        $mask->addFlag(array('CAN_VIEW', 'CAN_DELETE'));
+        $this->assertSame(9, $mask->getBitmask());
+        $this->assertSame(array('CAN_VIEW', 'CAN_DELETE'), $mask->getFlags());
+        $mask->addFlag(array('CAN_CREATE'));
+        $this->assertSame(array('CAN_VIEW', 'CAN_CREATE', 'CAN_DELETE'), $mask->getFlags());
+        $mask->removeFlag('CAN_VIEW');
+        $this->assertSame(array('CAN_CREATE', 'CAN_DELETE'), $mask->getFlags());
+    }
+
 }

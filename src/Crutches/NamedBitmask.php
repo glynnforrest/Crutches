@@ -145,4 +145,21 @@ class NamedBitmask
         return $this;
     }
 
+    /**
+     * Get a list of all set flags.
+     *
+     * @return array A list of all set flags
+     */
+    public function getFlags()
+    {
+        $flags = array();
+        foreach ($this->names as $name => $bit) {
+            if (($this->bitmask & $bit) === $bit) {
+                $flags[] = $name;
+            }
+        }
+
+        return $flags;
+    }
+
 }
