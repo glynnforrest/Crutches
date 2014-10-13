@@ -14,6 +14,8 @@ Included classes:
   the object instead of returning a new instance.
 * Bitmask - A series of flags used to represent a group of properties
   (e.g. user permissions).
+* NamedBitmask - An extension of Bitmask that abstracts numeric flags
+  away from the user, instead referring to named flags.
 
 See the docs/ directory for detailed usage on each.
 

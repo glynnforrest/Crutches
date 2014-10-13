@@ -74,7 +74,7 @@ $mask->setNames(array $names)
 Set the names of bitmask flags.
 
     $mask = new NamedBitmask(array('ADMIN', 'USER'), 1);
-    $mask->setName(array('ADMIN', 'PLEB));
+    $mask->setNames(array('ADMIN', 'PLEB));
     print_r($mask->getNames());
     // array('ADMIN', 'PLEB');
 
@@ -84,9 +84,7 @@ $mask->hasFlag(string $flag)
 
 Check if the NamedBitmask contains a given flag.
 
-Check more than one flag at a time by separating individual
-flags with |. For example, supplying 4 | 1 will check for both
-4 and 1, and will pass only if both 4 and 1 are present.
+Check more than one flag at a time by passing flags as an array.
 
     $mask = new NamedBitmask(array('ADMIN', 'USER'), 1);
     $mask->hasFlag('ADMIN');
@@ -98,9 +96,7 @@ $mask->addFlag(string $flag)
 
 Add a flag to the NamedBitmask.
 
-Add more than one flag at a time by separating individual
-flags with |. For example, supplying 4 | 1 will add both 4
-and 1.
+Add more than one flag at a time by passing flags as an array.
 
     $mask = new NamedBitmask(array('ADMIN', 'USER'), 0);
     $mask->addFlag('USER');
@@ -113,9 +109,7 @@ $mask->removeFlag(string $flag)
 
 Remove a flag from the NamedBitmask.
 
-Remove more than one flag at a time by separating individual
-flags with |. For example, supplying 4 | 1 will remove both 4
-and 1.
+Remove more than one flag at a time by passing flags as an array.
 
     $mask = new NamedBitmask(array('ADMIN', 'USER'), 1);
     $mask->removeFlag('ADMIN');
