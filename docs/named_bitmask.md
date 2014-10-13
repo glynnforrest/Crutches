@@ -115,3 +115,18 @@ Remove more than one flag at a time by passing flags as an array.
     $mask->removeFlag('ADMIN');
     echo $mask->getBitmask();
     // 0
+
+### getFlags
+
+$mask->getFlags()
+
+Get a list of all set flags.
+
+    $mask = new NamedBitmask(array('CAN_VIEW', 'CAN_CREATE', 'CAN_EDIT', 'CAN_DELETE'));
+    $mask->addFlag('CAN_CREATE');
+    print_r($mask->getFlags());
+    // array('CAN_CREATE')
+
+    $mask->addFlag(array('CAN_VIEW', 'CAN_DELETE');
+    print_r($mask->getFlags());
+    // array('CAN_VIEW', 'CAN_CREATE', 'CAN_DELETE')
