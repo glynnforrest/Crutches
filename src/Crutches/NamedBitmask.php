@@ -21,7 +21,7 @@ class NamedBitmask
     public function __construct(array $names, $bitmask = 0)
     {
         $this->bitmask = $bitmask;
-        $this->setNames($names);
+        $this->setNames($names, false);
     }
 
     /**
@@ -58,15 +58,19 @@ class NamedBitmask
     }
 
     /**
-     * Set the names of bitmask flags.
+     * Set the names of bitmask flags. The currently set bitmask flags
+     * will be preserved unless $update_bitmask is set to false.
      *
-     * @param  array                 $names An array of flag names
+     * @param  array                 $names          An array of flag names
+     * @param  bool                  $update_bitmask Update the value of the bitmask to match the cnew flags
      * @return Crutches\NamedBitmask This NamedBitmask instance
      */
     public function setNames(array $names, $update_bitmask = true)
     {
-        //update the names here - take a diff of old and new names,
-        //compare values and add to new bitmask
+        //take note of any current flags to update the bitmask.
+        if ($update_bitmask) {
+            $current_flags = $this->getFlags();
+        }
 
         //each name will have an incrementing bit value, e.g. an array
         //of 3 will have values of 1, 2 and 4
@@ -81,6 +85,12 @@ class NamedBitmask
         //necessary for 5.3 array_combine with empty arrays
         if ($count > 0) {
             $this->names = array_combine($names, $bits);
+        }
+
+        // update the bitmask now that new names are set.
+        if ($update_bitmask) {
+            $this->bitmask = 0;
+            $this->addFlag($current_flags);
         }
 
         return $this;
