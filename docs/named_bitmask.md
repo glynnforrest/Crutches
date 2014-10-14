@@ -69,14 +69,28 @@ Get the names of bitmask flags.
 
 ### setNames
 
-$mask->setNames(array $names)
+$mask->setNames(array $names, bool $update_bitmask = true)
 
-Set the names of bitmask flags.
+Set the names of bitmask flags. The currently set bitmask flags will
+be preserved unless $update_bitmask is set to false.
 
-    $mask = new NamedBitmask(array('ADMIN', 'USER'), 1);
-    $mask->setNames(array('ADMIN', 'PLEB));
+    $mask = new NamedBitmask(array('CAN_VIEW', 'CAN_CREATE', 'CAN_EDIT', 'CAN_DELETE'));
+    $mask->addFlag(array('CAN_CREATE', 'CAN_VIEW'));
+
+    echo $mask->getBitmask()
+    // 3
+    print_r($mask->getFlags());
+    // array('CAN_VIEW', 'CAN_CREATE');
+
+    $mask->setNames(array('CAN_DELETE', 'CAN_CREATE', 'CAN_VIEW', 'CAN_EDIT', 'IS_ADMIN'));
     print_r($mask->getNames());
-    // array('ADMIN', 'PLEB');
+    // array('CAN_DELETE', 'CAN_CREATE', 'CAN_VIEW', 'CAN_EDIT', 'IS_ADMIN');
+
+    // the bitmask is updated to keep the flags the same
+    echo $mask->getBitmask()
+    // 6
+    print_r($mask->getFlags());
+    // array('CAN_CREATE, 'CAN_VIEW);
 
 ### hasFlag
 

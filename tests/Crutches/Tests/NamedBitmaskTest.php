@@ -120,7 +120,7 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
 
         //updating the names should update the bitmask. The bitmask
         //will change but the flags will remain the same.
-        $mask->setNames(array('CAN_DELETE', 'CAN_CREATE', 'CAN_VIEW', 'CAN_EDIT'));
+        $mask->setNames(array('CAN_DELETE', 'CAN_CREATE', 'CAN_VIEW', 'CAN_EDIT', 'IS_ADMIN'));
         $this->assertSame(6, $mask->getBitmask());
         $this->assertSame(array('CAN_CREATE', 'CAN_VIEW'), $mask->getFlags());
     }
@@ -133,7 +133,7 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('CAN_VIEW', 'CAN_CREATE'), $mask->getFlags());
 
         //update the names but not the bitmask by passing false
-        $mask->setNames(array('CAN_DELETE', 'CAN_CREATE', 'CAN_VIEW', 'CAN_EDIT'), false);
+        $mask->setNames(array('CAN_DELETE', 'CAN_CREATE', 'CAN_VIEW', 'CAN_EDIT', 'IS_ADMIN'), false);
         $this->assertSame(3, $mask->getBitmask());
         $this->assertSame(array('CAN_DELETE', 'CAN_CREATE'), $mask->getFlags());
     }
