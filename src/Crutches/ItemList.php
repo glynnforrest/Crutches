@@ -48,11 +48,38 @@ class ItemList
     {
         if (!is_int($index)) {
             throw new \InvalidArgumentException(
-                'Argument passed to ItemList::get() is not an integer.'
+                'Index passed to ItemList::get() is not an integer.'
             );
         }
 
         return isset($this->list[$index]) ? $this->list[$index] : null;
+    }
+
+    /**
+     * Set the element $index in the list.
+     *
+     * @param int   $index    The index of the element
+     * @param mixed $value    The value to set
+     * @param bool  $in_place Whether to modify the current list
+     */
+    public function set($index, $value, $in_place = false)
+    {
+        if (!is_int($index)) {
+            throw new \InvalidArgumentException(
+                'Index passed to ItemList::set() is not an integer.'
+            );
+        }
+
+        if ($in_place) {
+            $this->list[$index] = $value;
+
+            return $this;
+        }
+
+        $modified = $this->list;
+        $modified[$index] = $value;
+
+        return new ItemList($modified);
     }
 
     /**

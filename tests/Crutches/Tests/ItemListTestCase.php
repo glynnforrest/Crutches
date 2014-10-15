@@ -152,8 +152,36 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testGetThrowsException()
     {
         $l = $this->newInstance(array('zero', 'one', 'two', 'three'));
-        $this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::get() is not an integer.');
+        $this->setExpectedException('\InvalidArgumentException', 'Index passed to ItemList::get() is not an integer.');
         $l->get('foo');
+    }
+
+    public function testSet()
+    {
+        $l = $this->newInstance(array('foo', 'bar', 'baz'));
+        $modified = $l->set(3, 'quo');
+        $this->assertSame(array('foo', 'bar', 'baz', 'quo'), $modified->getList());
+        if ($l instanceof MutableItemList) {
+            $this->assertSame($l, $modified);
+        } else {
+            $this->assertInstanceOf('Crutches\ItemList', $modified);
+            $this->assertNotSame($l, $modified);
+        }
+    }
+
+    public function testSetInPlace()
+    {
+        $l = $this->newInstance(array('foo', 'bar', 'baz'));
+        $modified = $l->set(3, 'quo', true);
+        $this->assertSame(array('foo', 'bar', 'baz', 'quo'), $modified->getList());
+        $this->assertSame($l, $modified);
+    }
+
+    public function testSetThrowsException()
+    {
+        $l = $this->newInstance(array());
+        $this->setExpectedException('\InvalidArgumentException', 'Index passed to ItemList::set() is not an integer.');
+        $l->set('foo', 'bar');
     }
 
     public function testMap()

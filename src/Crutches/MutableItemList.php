@@ -10,6 +10,11 @@ namespace Crutches;
 class MutableItemList extends ItemList
 {
 
+    public function set($index, $value, $in_place = true)
+    {
+        return parent::set($index, $value, $in_place);
+    }
+
     public function prefix($string, $in_place = true)
     {
         return parent::prefix($string, $in_place);
