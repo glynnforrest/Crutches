@@ -83,6 +83,32 @@ class ItemList
     }
 
     /**
+     * Remove the element $index from the list.
+     *
+     * @param int  $index    The index of the element
+     * @param bool $in_place Whether to modify the current list
+     */
+    public function remove($index, $in_place = false)
+    {
+        if (!is_int($index)) {
+            throw new \InvalidArgumentException(
+                'Index passed to ItemList::remove() is not an integer.'
+            );
+        }
+
+        if ($in_place) {
+            unset($this->list[$index]);
+
+            return $this;
+        }
+
+        $modified = $this->list;
+        unset($modified[$index]);
+
+        return new ItemList($modified);
+    }
+
+    /**
      * Add $string to the start of each value in the list.
      *
      * @param string $string   The string to add

@@ -15,6 +15,11 @@ class MutableItemList extends ItemList
         return parent::set($index, $value, $in_place);
     }
 
+    public function remove($index, $in_place = true)
+    {
+        return parent::remove($index, $in_place);
+    }
+
     public function prefix($string, $in_place = true)
     {
         return parent::prefix($string, $in_place);

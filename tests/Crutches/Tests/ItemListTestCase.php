@@ -184,6 +184,34 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
         $l->set('foo', 'bar');
     }
 
+    public function testRemove()
+    {
+        $l = $this->newInstance(array('foo', 'bar', 'baz'));
+        $modified = $l->remove(2);
+        $this->assertSame(array('foo', 'bar'), $modified->getList());
+        if ($l instanceof MutableItemList) {
+            $this->assertSame($l, $modified);
+        } else {
+            $this->assertInstanceOf('Crutches\ItemList', $modified);
+            $this->assertNotSame($l, $modified);
+        }
+    }
+
+    public function testRemoveInPlace()
+    {
+        $l = $this->newInstance(array('foo', 'bar', 'baz'));
+        $modified = $l->remove(2, true);
+        $this->assertSame(array('foo', 'bar'), $modified->getList());
+        $this->assertSame($l, $modified);
+    }
+
+    public function testRemoveThrowsException()
+    {
+        $l = $this->newInstance(array());
+        $this->setExpectedException('\InvalidArgumentException', 'Index passed to ItemList::remove() is not an integer.');
+        $l->remove('foo');
+    }
+
     public function testMap()
     {
         $l = $this->newInstance(array('foo', 'bar'));
