@@ -7,7 +7,7 @@ namespace Crutches;
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class ItemList
+class ItemList implements \ArrayAccess
 {
     protected $list;
 
@@ -390,6 +390,26 @@ class ItemList
         $slice = array_slice($this->list, $offset, $length);
 
         return new ItemList($slice);
+    }
+
+    public function offsetExists($offset)
+    {
+        return isset($this->list[$offset]);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        throw new \Exception('ItemList may not be modified with offsetSet. Use set() or MutableItemList instead.');
+    }
+
+    public function offsetUnset($offset)
+    {
+        throw new \Exception('ItemList may not be modified with offsetUnset. Use remove() or MutableItemList instead.');
     }
 
 }

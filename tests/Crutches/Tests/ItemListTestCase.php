@@ -19,6 +19,33 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('one', 'two'), $l->getList());
     }
 
+    public function testImplementsArrayAccess()
+    {
+        $this->assertInstanceOf('\ArrayAccess', $this->newInstance(array()));
+    }
+
+    public function testOffsetGet()
+    {
+        $l = $this->newInstance(array('one', 'two'));
+        $this->assertSame('one', $l[0]);
+        $this->assertNull($l[3]);
+    }
+
+    public function testOffsetGetThrowsException()
+    {
+        $l = $this->newInstance(array());
+        $this->setExpectedException('\Exception');
+        $var = $l['foo'];
+    }
+
+    public function testOffsetExists()
+    {
+        $l = $this->newInstance(array('one', 'two'));
+        $this->assertTrue(isset($l[0]));
+        $this->assertTrue(isset($l[1]));
+        $this->assertFalse(isset($l[2]));
+    }
+
     public function testPrefix()
     {
         $l = $this->newInstance(array('one', 'two', 'three'));

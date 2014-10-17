@@ -70,4 +70,22 @@ class MutableItemList extends ItemList
         return parent::slice($offset, $length, $in_place);
     }
 
+    public function offsetSet($offset, $value)
+    {
+        if (!is_int($offset)) {
+            throw new \InvalidArgumentException('MutableItemList#offsetUnset() expects an integer argument');
+        }
+
+        $this->list[$offset] = $value;
+    }
+
+    public function offsetUnset($offset)
+    {
+        if (!is_int($offset)) {
+            throw new \InvalidArgumentException('MutableItemList#offsetUnset() expects an integer argument');
+        }
+
+        unset($this->list[$offset]);
+    }
+
 }

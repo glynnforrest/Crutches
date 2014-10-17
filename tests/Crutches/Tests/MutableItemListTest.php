@@ -24,4 +24,32 @@ class MutableItemListTest extends ItemListTestCase
         $this->assertInstanceOf('Crutches\ItemList', MutableItemList::create(array('foo', 'bar')));
     }
 
+    public function testOffsetSet()
+    {
+        $l = new MutableItemList(array('foo', 'bar'));
+        $l[2] = 'baz';
+        $this->assertSame(array('foo', 'bar', 'baz'), $l->getList());
+    }
+
+    public function testOffsetSetThrowsException()
+    {
+        $l = new MutableItemList(array('foo', 'bar'));
+        $this->setExpectedException('\Exception');
+        $l['foo'] = 'baz';
+    }
+
+    public function testOffsetUnset()
+    {
+        $l = new MutableItemList(array('foo', 'bar'));
+        unset($l[1]);
+        $this->assertSame(array('foo'), $l->getList());
+    }
+
+    public function testOffsetUnsetThrowsException()
+    {
+        $l = new MutableItemList(array('foo', 'bar'));
+        $this->setExpectedException('\Exception');
+        unset($l['foo']);
+    }
+
 }
