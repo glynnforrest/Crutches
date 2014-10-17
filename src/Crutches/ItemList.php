@@ -18,7 +18,7 @@ class ItemList implements \ArrayAccess
      */
     public function __construct(array $list = array())
     {
-        $this->list = $list;
+        $this->list = array_values($list);
     }
 
     /**

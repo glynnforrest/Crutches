@@ -19,6 +19,12 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('one', 'two'), $l->getList());
     }
 
+    public function testKeysAreRemovedOnCreation()
+    {
+        $l = $this->newInstance(array('one', 'foo' => 'bar', 'baz', 5 => 'five'));
+        $this->assertSame(array('one', 'bar', 'baz', 'five'), $l->getList());
+    }
+
     public function testImplementsArrayAccess()
     {
         $this->assertInstanceOf('\ArrayAccess', $this->newInstance(array()));
