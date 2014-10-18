@@ -7,7 +7,7 @@ namespace Crutches;
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class ItemList implements \ArrayAccess
+class ItemList implements \ArrayAccess, \Countable
 {
     protected $list;
 
@@ -410,6 +410,11 @@ class ItemList implements \ArrayAccess
     public function offsetUnset($offset)
     {
         throw new \Exception('ItemList may not be modified with offsetUnset. Use remove() or MutableItemList instead.');
+    }
+
+    public function count()
+    {
+        return count($this->list);
     }
 
 }

@@ -52,6 +52,16 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($l[2]));
     }
 
+    public function testCountable()
+    {
+        $l = $this->newInstance(array('one', 'two', 'three'));
+        $this->assertInstanceOf('\Countable', $l);
+        $this->assertSame(3, count($l));
+
+        $modified = $l->set(3, 'four');
+        $this->assertSame(4, count($modified));
+    }
+
     public function testPrefix()
     {
         $l = $this->newInstance(array('one', 'two', 'three'));
