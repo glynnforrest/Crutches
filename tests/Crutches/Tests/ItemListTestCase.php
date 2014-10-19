@@ -62,6 +62,13 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
         $this->assertSame(4, count($modified));
     }
 
+    public function testIteratorAggregate()
+    {
+        $l = $this->newInstance(array('foo', 'bar', 'baz'));
+        $this->assertInstanceOf('\IteratorAggregate', $l);
+        $this->assertEquals(new \ArrayIterator(array('foo', 'bar', 'baz')), $l->getIterator());
+    }
+
     public function testPrefix()
     {
         $l = $this->newInstance(array('one', 'two', 'three'));

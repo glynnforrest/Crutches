@@ -7,7 +7,7 @@ namespace Crutches;
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class ItemList implements \ArrayAccess, \Countable
+class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     protected $list;
 
@@ -415,6 +415,11 @@ class ItemList implements \ArrayAccess, \Countable
     public function count()
     {
         return count($this->list);
+    }
+
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->list);
     }
 
 }
