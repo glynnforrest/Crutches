@@ -1,6 +1,7 @@
 {
     "name": "glynnforrest/crutches",
-    "description": "A utility library for strings, numbers, arrays and words.",
+    "description": "A PHP utility library",
+    "keywords": ["list", "bitmask", "dotarray", "utility", "tool", "support"],
     "authors": [
         {
             "name": "Glynn Forrest",
