@@ -5,25 +5,27 @@ This class allows for easy bitwise manipulation of an integer value.
 
 ## Quick example
 
-    $mask = new Bitmask(5);
+```php
+$mask = new Bitmask(5);
 
-    $mask->hasFlag(1);
-    // true
+$mask->hasFlag(1);
+// true
 
-    $mask->hasFlag(2);
-    // false
+$mask->hasFlag(2);
+// false
 
-    $mask->addFlag(2);
-    $mask->removeFlag(1);
+$mask->addFlag(2);
+$mask->removeFlag(1);
 
-    $mask->hasFlag(1);
-    // false
+$mask->hasFlag(1);
+// false
 
-    $mask->hasFlag(2);
-    // true
+$mask->hasFlag(2);
+// true
 
-    echo $mask->getBitmask();
-    // 6
+echo $mask->getBitmask();
+// 6
+```
 
 ## Methods
 
@@ -33,9 +35,11 @@ $mask->getBitmask()
 
 Get the bitmask value.
 
-    $mask = new Bitmask(5);
-    echo $mask->getBitmask();
-    // 5
+```php
+$mask = new Bitmask(5);
+echo $mask->getBitmask();
+// 5
+```
 
 ### setBitmask
 
@@ -43,10 +47,12 @@ $mask->setBitmask(int $bitmask)
 
 Set the bitmask value.
 
-    $mask = new Bitmask(4);
-    $mask->setBitmask(5);
-    echo $mask->getBitmask();
-    // 5
+```php
+$mask = new Bitmask(4);
+$mask->setBitmask(5);
+echo $mask->getBitmask();
+// 5
+```
 
 ### hasFlag
 
@@ -58,9 +64,11 @@ Check more than one flag at a time by separating individual
 flags with |. For example, supplying 4 | 1 will check for both
 4 and 1, and will pass only if both 4 and 1 are present.
 
-    $mask = new Bitmask(4);
-    $mask->hasFlag(4);
-    // true
+```php
+$mask = new Bitmask(4);
+$mask->hasFlag(4);
+// true
+```
 
 ### addFlag
 
@@ -72,10 +80,12 @@ Add more than one flag at a time by separating individual
 flags with |. For example, supplying 4 | 1 will add both 4
 and 1.
 
-    $mask = new Bitmask(4);
-    $mask->addFlag(1);
-    echo $mask->getBitmask();
-    // 5
+```php
+$mask = new Bitmask(4);
+$mask->addFlag(1);
+echo $mask->getBitmask();
+// 5
+```
 
 ### removeFlag
 
@@ -87,7 +97,9 @@ Remove more than one flag at a time by separating individual
 flags with |. For example, supplying 4 | 1 will remove both 4
 and 1.
 
-    $mask = new Bitmask(5);
-    $mask->removeFlag(4);
-    echo $mask->getBitmask();
-    // 1
+```php
+$mask = new Bitmask(5);
+$mask->removeFlag(4);
+echo $mask->getBitmask();
+// 1
+```
