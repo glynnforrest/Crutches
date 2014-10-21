@@ -6,19 +6,21 @@ functional - style methods.
 
 ## Quick example
 
-    $list = new \Crutches\ItemList(array('foo', 'bar', 'baz'));
+```php
+$list = new \Crutches\ItemList(array('foo', 'bar', 'baz'));
 
-    print_r($list->surround('-')->map('strtoupper')->takeRandom(1));
-    // array('-BAR-');
+print_r($list->surround('-')->map('strtoupper')->takeRandom(1));
+// array('-BAR-');
 
-    print_r($list->shuffle()->prefix(':'));
-    // array(':bar', ':baz', ':foo');
+print_r($list->shuffle()->prefix(':'));
+// array(':bar', ':baz', ':foo');
 
-    echo $list;
-    // "foo, bar, baz"
+echo $list;
+// "foo, bar, baz"
 
-    echo $list->human();
-    // foo, bar and baz
+echo $list->human();
+// foo, bar and baz
+```
 
 ## Methods
 
@@ -39,7 +41,9 @@ ItemList::create(array $list = array())
 
 Start chaining methods immediately after creation.
 
-    $shuffled = ItemList::create(array('foo', 'bar'))->shuffle();
+```php
+$shuffled = ItemList::create(array('foo', 'bar'))->shuffle();
+```
 
 ### getList
 
@@ -47,9 +51,11 @@ $list->getList()
 
 Get the underlying list as an array.
 
-    $list = new ItemList(array('one', 'two'));
-    print_r($list->getList());
-    // array('foo', 'bar');
+```php
+$list = new ItemList(array('one', 'two'));
+print_r($list->getList());
+// array('foo', 'bar');
+```
 
 ### get
 
@@ -58,12 +64,14 @@ $list->get(int $index)
 Get an element at the specific index or null if the index is out of
 range. Like arrays, the list is zero-indexed.
 
-    $list = new ItemList(array('foo', 'bar'));
-    echo $list->get(1);
-    // bar
+```php
+$list = new ItemList(array('foo', 'bar'));
+echo $list->get(1);
+// bar
 
-    echo $list->get(5);
-    // null
+echo $list->get(5);
+// null
+```
 
 ### prefix
 
@@ -71,9 +79,11 @@ $list->prefix(string $string, $in_place = false)
 
 Prepend a string to all elements.
 
-    $list = new ItemList(array('one', 'two'));
-    print_r($list->prefix('item ')->getList());
-    // array('item one', 'item two')
+```php
+$list = new ItemList(array('one', 'two'));
+print_r($list->prefix('item ')->getList());
+// array('item one', 'item two')
+```
 
 ### suffix
 
@@ -81,9 +91,11 @@ $list->suffix(string $string, $in_place = false)
 
 Append a string to all elements.
 
-    $list = new ItemList(array('one', 'two'));
-    print_r($list->suffix('potato')->getList());
-    // array('one potato', 'two potato')
+```php
+$list = new ItemList(array('one', 'two'));
+print_r($list->suffix('potato')->getList());
+// array('one potato', 'two potato')
+```
 
 ### surround
 
@@ -91,97 +103,115 @@ $list->surround(string $string, $in_place = false)
 
 Append and prepend a string to all elements.
 
-    $list = new ItemList(array('one', 'two'));
-    print_r($list->surround(':')->getList());
-    // array(':one:', ':two:')
+```php
+$list = new ItemList(array('one', 'two'));
+print_r($list->surround(':')->getList());
+// array(':one:', ':two:')
+```
 
 ### stringify
 
-    $list->stringify(string $delimeter = ', ', string $prefix = '', string $suffix = '')
+$list->stringify(string $delimeter = ', ', string $prefix = '', string $suffix = '')
 
 Get the list as a string, separating each value with $delimeter. If
 supplied, $prefix and $suffix will be added to each value. The list is
 not modified.
 
-    $list = new ItemList(array('one', 'two', 'three'));
-    echo $list->stringify();
-    // one, two, three
+```php
+$list = new ItemList(array('one', 'two', 'three'));
+echo $list->stringify();
+// one, two, three
 
-    echo $list->stringify(', ', 'item ', '!');
-    // item one!, item two!, item three!
+echo $list->stringify(', ', 'item ', '!');
+// item one!, item two!, item three!
+```
 
 ### ___toString
 
 When cast to a string, an ItemList returns the result of stringify().
 
-    echo new ItemList(array('foo', 'bar'));
-    // foo, bar
+```php
+echo new ItemList(array('foo', 'bar'));
+// foo, bar
+```
 
 ### human
 
-    $list->human(string $ending = ' and')
+$list->human(string $ending = ' and')
 
 A variation on stringify() that adds a different delimeter at the end
 for nicer reading.
 
-    $list = new ItemList(array('good', 'quick', 'cheap'));
-    echo $list->human();
-    // good, quick and cheap
+```php
+$list = new ItemList(array('good', 'quick', 'cheap'));
+echo $list->human();
+// good, quick and cheap
 
-    echo $list->human(', or');
-    // good, quick, or cheap
+echo $list->human(', or');
+// good, quick, or cheap
+```
 
 ### map
 
-    $list->map($callback, $in_place = false)
+$list->map($callback, $in_place = false)
 
 Map a function over all items in the list.
 
-    $list = new ItemList(array('fOo', 'BaR', 'bAz'));
-    print_r($list->map('strtolower')->getList());
-    // array('foo', 'bar', 'baz');
+```php
+$list = new ItemList(array('fOo', 'BaR', 'bAz'));
+print_r($list->map('strtolower')->getList());
+// array('foo', 'bar', 'baz');
+```
 
 ### filter
 
-    $list->filter($callback, $in_place = false)
+$list->filter($callback, $in_place = false)
 
 Use a function to filter items from the list.
 
-    $list = new ItemList(array(1, 2.2, 3.3, 4));
-    print_r($list->filter('is_int)->getList());
-    // array(1, 4);
+```php
+$list = new ItemList(array(1, 2.2, 3.3, 4));
+print_r($list->filter('is_int)->getList());
+// array(1, 4);
+```
 
 ### take
 
-    $list->take(int $amount, $in_place = false);
+$list->take(int $amount, $in_place = false);
 
 Take a specified amount of elements from the start of the list.
 
-    $list = new ItemList(array('foo', 'bar', 'baz', 'quo'));
-    print_r($list->take(2)->getList());
-    // array('foo', 'bar')
+```php
+$list = new ItemList(array('foo', 'bar', 'baz', 'quo'));
+print_r($list->take(2)->getList());
+// array('foo', 'bar')
+```
 
 ### takeRandom
 
-    $list->takeRandom(int $amount, $in_place = false);
+$list->takeRandom(int $amount, $in_place = false);
 
 Take a specified amount of elements randomly from the list.
 
-    $list = new ItemList(array('good', 'quick', 'cheap'));
-    print_r($list->takeRandom(2)->getList());
-    // array('good', 'cheap');
+```php
+$list = new ItemList(array('good', 'quick', 'cheap'));
+print_r($list->takeRandom(2)->getList());
+// array('good', 'cheap');
+```
 
 ### shuffle
 
-    $list->shuffle($in_place = false);
+$list->shuffle($in_place = false);
 
 Shuffle the list and return a new instance.
 
-    $list = new ItemList(array('foo', 'bar'));
-    $shuffled = $list->shuffle();
+```php
+$list = new ItemList(array('foo', 'bar'));
+$shuffled = $list->shuffle();
 
-    print_r($list->getList());
-    // array('foo', 'bar');
+print_r($list->getList());
+// array('foo', 'bar');
 
-    print_r($shuffled->getList());
-    // array('bar, 'foo);
+print_r($shuffled->getList());
+// array('bar', 'foo');
+```
