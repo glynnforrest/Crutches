@@ -20,12 +20,15 @@ class DotArray
     }
 
     /**
-     * Get a value from the array that matches $key.
-     * $key uses the dot array syntax: parent.child.child
-     * If the key matches an array the whole array will be returned.
-     * If no key is specified the entire array will be returned.
-     * $default will be returned (null unless specified) if the key is
-     * not found.
+     * Get a value from the array that matches $key. $key uses the dot
+     * array syntax, e.g. parent.child.child. If the key matches an
+     * array the whole array will be returned. If no key is specified
+     * the entire array will be returned. $default will be returned
+     * (null unless specified) if the key is not found.
+     *
+     * @param  string $key     The key
+     * @param  mixed  $default The default value to return
+     * @return mixed  The value
      */
     public function get($key = null, $default = null)
     {
@@ -51,6 +54,10 @@ class DotArray
      * Get the first value from an array of values that matches $key.
      * $default will be returned (null unless specified) if the key is
      * not found or does not contain an array.
+     *
+     * @param  string $key     The key
+     * @param  mixed  $default The default value to return
+     * @return mixed  The value
      */
     public function getFirst($key = null, $default = null)
     {
@@ -64,10 +71,12 @@ class DotArray
     }
 
     /**
-     * Set an array value with $key.
-     * $key uses the dot array syntax: parent.child.child.
-     * If $value is an array this will also be accessible using the
-     * dot array syntax.
+     * Set an array value with $key. $key uses the dot array syntax,
+     * e.g. parent.child.child. If $value is an array this will also
+     * be accessible using the dot array syntax.
+     *
+     * @param string $key     The key
+     * @param mixed  $default The default value to return
      */
     public function set($key, $value)
     {
@@ -85,9 +94,8 @@ class DotArray
     }
 
     /**
-     * Merge values in this DotArray instance with values from
-     * $array. Any conflicting keys will be overwritten by those in
-     * $array.
+     * Merge values with values from $array. Any conflicting keys will
+     * be overwritten by those in $array.
      *
      * @param array $array The array to merge
      */
