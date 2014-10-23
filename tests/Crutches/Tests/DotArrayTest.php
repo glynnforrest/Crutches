@@ -18,14 +18,6 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase
             'two' => 'two.two'
         ));
 
-    public function testConstruct()
-    {
-        $d = new DotArray();
-        $this->assertTrue($d instanceof DotArray);
-        $e = new DotArray($this->arr);
-        $this->assertTrue($e instanceof DotArray);
-    }
-
     public function testGet()
     {
         $c = new DotArray($this->arr);
@@ -40,6 +32,18 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('two.one', $c->get('two.one', 'default'));
     }
 
+    public function testGetNumericKeys()
+    {
+        $c = new DotArray(array('foo', 'bar', array('one', 'two')));
+        $this->assertSame('foo', $c->get('0'));
+        $this->assertSame('foo', $c->get(0));
+        $this->assertSame('bar', $c->get('1'));
+        $this->assertSame('bar', $c->get(1));
+        $this->assertSame('one', $c->get('2.0'));
+        $this->assertSame('two', $c->get('2.1'));
+        $this->assertSame('two', $c->get(2.1));
+    }
+
     public function testGetFirst()
     {
         $c = new DotArray($this->arr);
@@ -52,6 +56,13 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase
         $c = new DotArray($this->arr);
         $this->assertSame('default', $c->getFirst('fake-key', 'default'));
         $this->assertSame('two.one', $c->getFirst('two', 'default'));
+    }
+
+    public function testGetFirstNoKey()
+    {
+        $c = new DotArray($this->arr);
+        $c->set('foo', array('foo', 'bar', 'baz'));
+        $this->assertSame('foo', $c->getFirst('foo'));
     }
 
     public function testSet()

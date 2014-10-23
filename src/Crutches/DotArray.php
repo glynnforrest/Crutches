@@ -29,7 +29,7 @@ class DotArray
      */
     public function get($key = null, $default = null)
     {
-        if (!$key) {
+        if ($key === null) {
             return $this->array;
         }
         $parts = explode('.', $key);
