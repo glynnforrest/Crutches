@@ -46,10 +46,8 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function get($index)
     {
-        if (!is_int($index)) {
-            throw new \InvalidArgumentException(
-                'Index passed to ItemList::get() is not an integer.'
-            );
+        if (!is_int($index) || $index < 0) {
+            throw new \InvalidArgumentException('ItemList::get() expects a positive integer argument.');
         }
 
         return isset($this->list[$index]) ? $this->list[$index] : null;
@@ -64,10 +62,8 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function set($index, $value, $in_place = false)
     {
-        if (!is_int($index)) {
-            throw new \InvalidArgumentException(
-                'Index passed to ItemList::set() is not an integer.'
-            );
+        if (!is_int($index) || $index < 0) {
+            throw new \InvalidArgumentException('ItemList::set() expects a positive integer argument.');
         }
 
         if ($in_place) {
@@ -90,10 +86,8 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function remove($index, $in_place = false)
     {
-        if (!is_int($index)) {
-            throw new \InvalidArgumentException(
-                'Index passed to ItemList::remove() is not an integer.'
-            );
+        if (!is_int($index) || $index < 0) {
+            throw new \InvalidArgumentException('ItemList::remove() expects a positive integer argument.');
         }
 
         if ($in_place) {
@@ -231,9 +225,7 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
     public function map($callback, $in_place = false)
     {
         if (!is_callable($callback)) {
-            throw new \InvalidArgumentException(
-                'Argument passed to ItemList::map() is not callable.'
-            );
+            throw new \InvalidArgumentException('ItemList::map() expects a callable argument.');
         }
 
         $mapped = array_map($callback, $this->list);
@@ -257,9 +249,7 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
     public function filter($callback, $in_place = false)
     {
         if (!is_callable($callback)) {
-            throw new \InvalidArgumentException(
-                'Argument passed to ItemList::filter() is not callable.'
-            );
+            throw new \InvalidArgumentException('ItemList::filter() expects a callable argument.');
         }
         $filtered = array_values(array_filter($this->list, $callback));
 
@@ -285,7 +275,7 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
     public function take($amount, $in_place = false)
     {
         if (!is_int($amount)) {
-            throw new \InvalidArgumentException('ItemList#take() expects an integer argument');
+            throw new \InvalidArgumentException('ItemList::take() expects an integer argument.');
         }
 
         $taken = array_slice($this->list, 0, $amount);
@@ -309,7 +299,7 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
     public function takeRandom($amount, $in_place = false)
     {
         if (!is_int($amount)) {
-            throw new \InvalidArgumentException('ItemList#take() expects an integer argument');
+            throw new \InvalidArgumentException('ItemList::takeRandom() expects an integer argument.');
         }
 
         $taken = array();
@@ -337,7 +327,7 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
     public function drop($amount, $in_place = false)
     {
         if (!is_int($amount) || $amount < 0) {
-            throw new \InvalidArgumentException('ItemList#drop() expects a positive integer argument');
+            throw new \InvalidArgumentException('ItemList::drop() expects a positive integer argument.');
         }
 
         $remaining = array_slice($this->list, $amount);
@@ -404,12 +394,12 @@ class ItemList implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function offsetSet($offset, $value)
     {
-        throw new \Exception('ItemList may not be modified with offsetSet. Use set() or MutableItemList instead.');
+        throw new \Exception('ItemList may not be modified with offsetSet(). Use set() or MutableItemList instead.');
     }
 
     public function offsetUnset($offset)
     {
-        throw new \Exception('ItemList may not be modified with offsetUnset. Use remove() or MutableItemList instead.');
+        throw new \Exception('ItemList may not be modified with offsetUnset(). Use remove() or MutableItemList instead.');
     }
 
     public function count()

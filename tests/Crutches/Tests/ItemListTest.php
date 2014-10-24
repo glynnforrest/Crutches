@@ -27,14 +27,14 @@ class ItemListTest extends ItemListTestCase
     public function testOffsetSet()
     {
         $l = $this->newInstance(array());
-        $this->setExpectedException('\Exception');
+        $this->setExpectedException('Exception', 'ItemList may not be modified with offsetSet(). Use set() or MutableItemList instead.');
         $l[0] = 'foo';
     }
 
     public function testOffsetUnset()
     {
         $l = $this->newInstance(array('foo'));
-        $this->setExpectedException('\Exception');
+        $this->setExpectedException('Exception', 'ItemList may not be modified with offsetUnset(). Use remove() or MutableItemList instead.');
         unset($l[0]);
     }
 

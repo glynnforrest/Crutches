@@ -40,7 +40,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testOffsetGetThrowsException()
     {
         $l = $this->newInstance(array());
-        $this->setExpectedException('\Exception');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::get() expects a positive integer argument.');
         $var = $l['foo'];
     }
 
@@ -202,7 +202,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testGetThrowsException()
     {
         $l = $this->newInstance(array('zero', 'one', 'two', 'three'));
-        $this->setExpectedException('\InvalidArgumentException', 'Index passed to ItemList::get() is not an integer.');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::get() expects a positive integer argument.');
         $l->get('foo');
     }
 
@@ -230,7 +230,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testSetThrowsException()
     {
         $l = $this->newInstance(array());
-        $this->setExpectedException('\InvalidArgumentException', 'Index passed to ItemList::set() is not an integer.');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::set() expects a positive integer argument.');
         $l->set('foo', 'bar');
     }
 
@@ -258,7 +258,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testRemoveThrowsException()
     {
         $l = $this->newInstance(array());
-        $this->setExpectedException('\InvalidArgumentException', 'Index passed to ItemList::remove() is not an integer.');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::remove() expects a positive integer argument.');
         $l->remove('foo');
     }
 
@@ -290,7 +290,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testMapThrowsException()
     {
         $l = $this->newInstance(array('foo', 'bar'));
-        $this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::map() is not callable.');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::map() expects a callable argument.');
         $l->map('not a function');
     }
 
@@ -323,7 +323,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testFilterThrowsException()
     {
         $l = $this->newInstance(array('foo', 'bar'));
-        $this->setExpectedException('\InvalidArgumentException', 'Argument passed to ItemList::filter() is not callable.');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::filter() expects a callable argument.');
         $l->filter('not a function');
     }
 
@@ -383,7 +383,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testTakeThrowsException($argument)
     {
         $l = $this->newInstance(array('foo', 'bar'));
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::take() expects an integer argument.');
         $l->take($argument);
     }
 
@@ -442,7 +442,7 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
     public function testDropThrowsException($argument)
     {
         $l = $this->newInstance(array('foo', 'bar'));
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::drop() expects a positive integer argument.');
         $l->drop($argument);
     }
 
@@ -489,6 +489,13 @@ abstract class ItemListTestCase extends \PHPUnit_Framework_TestCase
         $taken = $l->takeRandom(2, true);
         $this->assertSame($l, $taken);
         $this->assertTrue(count($taken->getList()) === 2);
+    }
+
+    public function testTakeRandomThrowsException()
+    {
+        $l = $this->newInstance(array());
+        $this->setExpectedException('InvalidArgumentException', 'ItemList::takeRandom() expects an integer argument');
+        $var = $l->takeRandom('foo');
     }
 
     public function sliceProvider()
