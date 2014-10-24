@@ -18,17 +18,17 @@ class BitmaskTest extends \PHPUnit_Framework_TestCase
     public function testGetBitmask()
     {
         $bitmask = new Bitmask(51);
-        $this->assertEquals(51, $bitmask->getBitmask());
+        $this->assertSame(51, $bitmask->getBitmask());
     }
 
     public function testSetBitmask()
     {
         $bitmask = new Bitmask();
         $this->assertInstanceOf('\Crutches\Bitmask', $bitmask->setBitmask(31));
-        $this->assertEquals(31, $bitmask->getBitmask());
+        $this->assertSame(31, $bitmask->getBitmask());
         $bitmask = new Bitmask(4);
         $bitmask->setBitmask(1);
-        $this->assertEquals(1, $bitmask->getBitmask());
+        $this->assertSame(1, $bitmask->getBitmask());
     }
 
     public function hasFlagProvider()
@@ -44,8 +44,8 @@ class BitmaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @dataProvider hasFlagProvider();
-	 */
+     * @dataProvider hasFlagProvider();
+     */
     public function testHasFlag($expected, $test)
     {
         $bitmask = new Bitmask(5);
@@ -56,20 +56,20 @@ class BitmaskTest extends \PHPUnit_Framework_TestCase
     {
         $bitmask = new Bitmask();
         $this->assertInstanceOf('\Crutches\Bitmask', $bitmask->addFlag(2));
-        $this->assertEquals(2, $bitmask->getBitmask());
+        $this->assertSame(2, $bitmask->getBitmask());
 
         //repeat to check the bit isn't flipped
         $bitmask->addFlag(2);
-        $this->assertEquals(2, $bitmask->getBitmask());
+        $this->assertSame(2, $bitmask->getBitmask());
 
         $bitmask->addFlag(1);
-        $this->assertEquals(3, $bitmask->getBitmask());
+        $this->assertSame(3, $bitmask->getBitmask());
 
         $bitmask->addFlag(8 | 16);
-        $this->assertEquals(27, $bitmask->getBitmask());
+        $this->assertSame(27, $bitmask->getBitmask());
 
         $bitmask->addFlag(4 | 1);
-        $this->assertEquals(31, $bitmask->getBitmask());
+        $this->assertSame(31, $bitmask->getBitmask());
     }
 
     public function testRemoveFlag()
@@ -78,23 +78,23 @@ class BitmaskTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('\Crutches\Bitmask', $bitmask->removeFlag(1));
         $this->assertFalse($bitmask->hasFlag(1));
-        $this->assertEquals(20, $bitmask->getBitmask());
+        $this->assertSame(20, $bitmask->getBitmask());
 
         //repeat to check the bit isn't flipped
         $bitmask->removeFlag(1);
-        $this->assertEquals(20, $bitmask->getBitmask());
+        $this->assertSame(20, $bitmask->getBitmask());
         $this->assertFalse($bitmask->hasFlag(1));
 
         $bitmask->removeFlag(16);
-        $this->assertEquals(4, $bitmask->getBitmask());
+        $this->assertSame(4, $bitmask->getBitmask());
         $this->assertFalse($bitmask->hasFlag(16));
 
         $bitmask->removeFlag(4 | 1);
-        $this->assertEquals(0, $bitmask->getBitmask());
+        $this->assertSame(0, $bitmask->getBitmask());
 
         $bitmask->setBitmask(11);
         $bitmask->removeFlag(2 | 1);
-        $this->assertEquals(8, $bitmask->getBitmask());
+        $this->assertSame(8, $bitmask->getBitmask());
         $this->assertFalse($bitmask->hasFlag(1));
         $this->assertFalse($bitmask->hasFlag(2));
         $this->assertFalse($bitmask->hasFlag(1 | 2));
