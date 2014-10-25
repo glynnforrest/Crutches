@@ -30,6 +30,9 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase
         $c = new DotArray($this->arr);
         $this->assertSame('default', $c->get('fake-key', 'default'));
         $this->assertSame('two.one', $c->get('two.one', 'default'));
+
+        $c->set('foo.bar.baz', 'something');
+        $this->assertSame('default', $c->get('foo.bar.fake-key.foo', 'default'));
     }
 
     public function testGetNumericKeys()
