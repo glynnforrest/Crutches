@@ -1,6 +1,20 @@
 Changelog
 =========
 
+### 0.3.0 2014-10-25
+
+* Addition of a NamedBitmask class for working with named flags
+  instead of bitwise values.
+* Removing Inflector classes, they are not in the scope of this
+  library.
+* Adding slice(), drop(), remove(), set() to ItemList.
+* ItemList and MutableItemList implement ArrayAccess, Countable and
+  IteratorAggregate.
+* Adding usage documentation for all classes.
+* 100% test coverage.
+* General improvement on code style and docblock comments.
+* No longer using the RMT release tool.
+
 ### 0.2.2 2014-05-13
 
 Adding MIT license.

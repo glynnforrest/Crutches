@@ -26,7 +26,7 @@ composer.json file:
 
 	{
 		"require": {
-			"glynnforrest/crutches": "0.2.*"
+			"glynnforrest/crutches": "0.3.*"
 		}
 	}
 
