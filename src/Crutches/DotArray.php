@@ -94,6 +94,26 @@ class DotArray
     }
 
     /**
+     * Unset an array value with $key. $key uses the dot array syntax,
+     * e.g. parent.child.child.
+     *
+     * @param string $key The key
+     */
+    public function remove($key)
+    {
+        $parts = explode('.', $key);
+        $scope = &$this->array;
+        $count = count($parts) - 1;
+        for ($i = 0; $i < $count; $i++) {
+            if (!isset($scope[$parts[$i]])) {
+                return;
+            }
+            $scope = &$scope[$parts[$i]];
+        }
+        unset($scope[$parts[$i]]);
+    }
+
+    /**
      * Merge values with values from $array. Any conflicting keys will
      * be overwritten by those in $array.
      *
@@ -103,5 +123,4 @@ class DotArray
     {
         $this->array = array_replace_recursive($this->array, $array);
     }
-
 }

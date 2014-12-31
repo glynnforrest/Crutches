@@ -138,4 +138,61 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $d->get());
     }
 
+    public function testRemove()
+    {
+        $d = new DotArray($this->arr);
+        $d->remove('one');
+        $expected = array(
+            'two' => array(
+                'one' => 'two.one',
+                'two' => 'two.two',
+            ),
+        );
+        $this->assertSame($expected, $d->get());
+    }
+
+    public function testRemoveNested()
+    {
+        $d = new DotArray($this->arr);
+        $d->remove('two.one');
+        $expected = array(
+            'one' => 'one',
+            'two' => array(
+                'two' => 'two.two',
+            ),
+        );
+        $this->assertSame($expected, $d->get());
+    }
+
+    public function testRemoveDeeplyNested()
+    {
+        $d = new DotArray($this->arr);
+        $d->set('foo.bar.baz', array(
+            'one' => 'one',
+            'two' => 'two',
+        ));
+        $d->remove('foo.bar.baz.one');
+        $expected = array(
+            'one' => 'one',
+            'two' => array(
+                'one' => 'two.one',
+                'two' => 'two.two',
+            ),
+            'foo' => array(
+                'bar' => array(
+                    'baz' => array(
+                        'two' => 'two',
+                    ),
+                ),
+            ),
+        );
+        $this->assertSame($expected, $d->get());
+    }
+
+    public function testRemoveUnknownKey()
+    {
+        $d = new DotArray($this->arr);
+        $d->remove('foo.bar.baz');
+        $this->assertSame($this->arr, $d->get());
+    }
 }
