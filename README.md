@@ -24,16 +24,20 @@ See the docs/ directory for detailed usage on each.
 Crutches is installed via Composer. To add it to your project, simply add it to your
 composer.json file:
 
-	{
-		"require": {
-			"glynnforrest/crutches": "0.3.*"
-		}
-	}
+```json
+{
+    "require": {
+        "glynnforrest/crutches": "0.3.*"
+    }
+}
+```
 
 And run composer to update your dependencies:
 
-	$ curl -s http://getcomposer.org/installer | php
-	$ php composer.phar update
+```bash
+curl -s http://getcomposer.org/installer | php
+php composer.phar update
+```
 
 ## License
 
