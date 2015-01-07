@@ -37,7 +37,8 @@ class DotArray
         }
         $parts = explode('.', $key);
         $scope = &$this->array;
-        for ($i = 0; $i < count($parts) - 1; $i++) {
+        $count = count($parts) - 1;
+        for ($i = 0; $i < $count; $i++) {
             if (!isset($scope[$parts[$i]])) {
                 return $default;
             }
