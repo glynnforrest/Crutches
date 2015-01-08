@@ -195,4 +195,21 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase
         $d->remove('foo.bar.baz');
         $this->assertSame($this->arr, $d->get());
     }
+
+    public function testExists()
+    {
+        $d = new DotArray($this->arr);
+        $this->assertTrue($d->exists('one'));
+        $this->assertTrue($d->exists('two.two'));
+        $this->assertFalse($d->exists('foo.bar'));
+
+        $d->set('two.two', false);
+        $this->assertTrue($d->exists('two.two'));
+
+        $d->remove('two.two');
+        $this->assertFalse($d->exists('two.two'));
+
+        $d->set('two.two', null);
+        $this->assertFalse($d->exists('two.two'));
+    }
 }

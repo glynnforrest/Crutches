@@ -115,6 +115,18 @@ class DotArray
     }
 
     /**
+     * Determine if $key is set. Like isset(), a value of null is
+     * considered not set.
+     *
+     * @param string $key The key
+     * @return bool
+     */
+    public function exists($key)
+    {
+        return null !== $this->get($key, null);
+    }
+
+    /**
      * Merge values with values from $array. Any conflicting keys will
      * be overwritten by those in $array.
      *
