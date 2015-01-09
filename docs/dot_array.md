@@ -120,6 +120,26 @@ print_r($array->get());
 // array()
 ```
 
+### exists
+
+$array->exists(string $key)
+
+Determine if $key is set. Like isset(), a value of null is considered
+not set.
+
+```php
+$array = new DotArray(array('foo' => 'hello world', 'bar' => false));
+
+$array->exists('foo');
+// true
+
+$array->exists('bar');
+// true
+
+$array->exists('baz');
+// false
+```
+
 ### merge
 
 $array->merge(array $array)
