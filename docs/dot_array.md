@@ -104,6 +104,22 @@ print_r($array->get());
 // array('foo' => array('bar' => 'hello'))
 ```
 
+### remove
+
+$array->remove(string $key)
+
+Unset an array value with $key. $key uses the dot array syntax,
+e.g. parent.child.child.
+
+```php
+$array = new DotArray(array('foo' => array('bar' => 'hello world')));
+
+$array->remove('foo.bar');
+
+print_r($array->get());
+// array()
+```
+
 ### merge
 
 $array->merge(array $array)
