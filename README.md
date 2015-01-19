@@ -1,7 +1,9 @@
 # Crutches
 ## A PHP utility library
 
-[![Build Status](https://travis-ci.org/glynnforrest/Crutches.png)](https://travis-ci.org/glynnforrest/Crutches)
+[![Build Status](https://img.shields.io/travis/glynnforrest/Crutches/master.svg)](https://travis-ci.org/glynnforrest/Crutches)
+[![Packagist](http://img.shields.io/packagist/v/glynnforrest/Crutches.svg)](https://packagist.org/packages/glynnforrest/Crutches)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 Included classes:
 
