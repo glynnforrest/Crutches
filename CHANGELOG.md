@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### 0.3.1 2015-01-19
+
+* Adding remove() and exists() to DotArray.
+
 ### 0.3.0 2014-10-25
 
 * Addition of a NamedBitmask class for working with named flags
