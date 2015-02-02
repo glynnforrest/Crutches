@@ -7,7 +7,7 @@ namespace Crutches;
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class NamedBitmask
+class NamedBitmask implements \IteratorAggregate
 {
     protected $bitmask;
     protected $names = array();
@@ -172,4 +172,8 @@ class NamedBitmask
         return $flags;
     }
 
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->getFlags());
+    }
 }

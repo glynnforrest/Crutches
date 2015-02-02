@@ -138,4 +138,20 @@ class NamedBitmaskTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('CAN_DELETE', 'CAN_CREATE'), $mask->getFlags());
     }
 
+    public function testGetIterator()
+    {
+        $mask = new NamedBitmask(array('CAN_VIEW', 'CAN_CREATE', 'CAN_EDIT', 'CAN_DELETE'));
+        $mask->addFlag(array('CAN_CREATE', 'CAN_VIEW'));
+        $mask->addFlag(array('CAN_DELETE'));
+        $mask->removeFlag(array('CAN_CREATE'));
+
+        $this->assertInstanceOf('\IteratorAggregate', $mask);
+
+        $flags = array('CAN_VIEW', 'CAN_DELETE');
+        $this->assertEquals(new \ArrayIterator($flags), $mask->getIterator());
+
+        foreach ($mask as $index => $flag) {
+            $this->assertSame($flags[$index], $flag);
+        }
+    }
 }
