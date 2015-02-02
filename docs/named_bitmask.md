@@ -1,10 +1,10 @@
 NamedBitmask
 ============
 
-Like the NamedBitmask class, the NamedBitmask class allows for easy bitwise
+Like the Bitmask class, the NamedBitmask class allows for easy bitwise
 manipulation of an integer value. With a NamedBitmask however, you can
 refer to the flags by names rather than the underlying bits. A good
-application of this could be for UserPermissions. The entire
+application of this could be for user permissions. The entire
 permission set could be stored as a single integer, and each
 permission could be checked and manipulated with names rather than
 integers.
