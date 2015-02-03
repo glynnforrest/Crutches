@@ -1,6 +1,11 @@
 Changelog
 =========
 
+### 0.3.2 2015-02-03
+
+* The set flags of NamedBitmask can now be looped over using
+  `IteratorAggregate`.
+
 ### 0.3.1 2015-01-19
 
 * Adding remove() and exists() to DotArray.
