@@ -92,6 +92,8 @@ class DotArray
             $scope = &$scope[$parts[$i]];
         }
         $scope[$parts[$i]] = $value;
+
+        return $this;
     }
 
     /**

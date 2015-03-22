@@ -71,7 +71,7 @@ class DotArrayTest extends \PHPUnit_Framework_TestCase
     public function testSet()
     {
         $c = new DotArray($this->arr);
-        $c->set('three', 3);
+        $this->assertSame($c, $c->set('three', 3));
         $this->assertSame(3, $c->get('three'));
     }
 
