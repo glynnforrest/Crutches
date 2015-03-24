@@ -44,4 +44,32 @@ class Roman
 
         return $roman;
     }
+
+    /**
+     * Convert a roman numeral to an integer.
+     *
+     * @param string $roman
+     *
+     * @return int
+     */
+    public static function toInt($roman)
+    {
+        $characters = array_flip(self::$characters);
+
+        $int = 0;
+        while (strlen($roman) > 0) {
+            if (isset($characters[substr($roman, 0, 2)])) {
+                $int += $characters[substr($roman, 0, 2)];
+                $roman = substr($roman, 2);
+                continue;
+            }
+            if (isset($characters[substr($roman, 0, 1)])) {
+                $int += $characters[substr($roman, 0, 1)];
+                $roman = substr($roman, 1);
+                continue;
+            }
+        }
+
+        return $int;
+    }
 }

@@ -80,4 +80,12 @@ class RomanTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($roman, Roman::toRoman($int));
     }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testToInt($int, $roman)
+    {
+        $this->assertSame($int, Roman::toInt($roman));
+    }
 }
