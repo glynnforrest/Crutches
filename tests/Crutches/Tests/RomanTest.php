@@ -109,4 +109,23 @@ class RomanTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($int, Roman::toInt($roman));
     }
+
+    public function invalidRomanProvider()
+    {
+        return array(
+            array(''),
+            array('FOO'),
+            array(0),
+            array(1),
+        );
+    }
+
+    /**
+     * @dataProvider invalidRomanProvider
+     */
+    public function testToIntThrowsExceptionOnInvalidRoman($roman)
+    {
+        $this->setExpectedException('\InvalidArgumentException');
+        Roman::toInt($roman);
+    }
 }

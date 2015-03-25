@@ -35,7 +35,7 @@ class Roman
     public static function toRoman($int)
     {
         if (!is_int($int) || $int < 1 || $int > 3999) {
-            throw new \InvalidArgumentException('A roman numeral must be an integer between 1 and 3999.');
+            throw new \InvalidArgumentException("A roman numeral must be an integer between 1 and 3999, $int given.");
         }
 
         $roman = '';
@@ -58,6 +58,10 @@ class Roman
      */
     public static function toInt($roman)
     {
+        if (!preg_match('`[MDCLXVI]+`', $roman)) {
+            throw new \InvalidArgumentException("$roman is an invalid roman numeral.");
+        }
+
         $characters = array_flip(self::$characters);
 
         $int = 0;
