@@ -34,6 +34,10 @@ class Roman
      */
     public static function toRoman($int)
     {
+        if (!is_int($int) || $int < 1 || $int > 3999) {
+            throw new \InvalidArgumentException('A roman numeral must be an integer between 1 and 3999.');
+        }
+
         $roman = '';
         foreach (self::$characters as $number => $character) {
             while ($int >= $number) {
