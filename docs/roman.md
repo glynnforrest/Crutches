@@ -12,6 +12,14 @@ echo Roman::toRoman(148);
 //'CXLVIII'
 ```
 
+Only numbers between 1 and 3999 are allowed. Any others will throw an
+`\InvalidArgumentException`.
+
+```php
+echo Roman::toRoman(4000);
+//InvalidArgumentException
+```
+
 ## To integer
 
 ```php
