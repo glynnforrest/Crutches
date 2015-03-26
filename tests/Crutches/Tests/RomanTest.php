@@ -128,4 +128,12 @@ class RomanTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\InvalidArgumentException');
         Roman::toInt($roman);
     }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testToIntSupportsLowerCaseCharacters($int, $roman)
+    {
+        $this->assertSame($int, Roman::toInt(strtolower($roman)));
+    }
 }

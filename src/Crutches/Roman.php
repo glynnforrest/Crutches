@@ -58,9 +58,10 @@ class Roman
      */
     public static function toInt($roman)
     {
-        if (!preg_match('`[MDCLXVI]+`', $roman)) {
+        if (!preg_match('`[MDCLXVI]+`', strtoupper($roman))) {
             throw new \InvalidArgumentException("$roman is an invalid roman numeral.");
         }
+        $roman = strtoupper($roman);
 
         $characters = array_flip(self::$characters);
 
