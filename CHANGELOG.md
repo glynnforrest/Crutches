@@ -1,6 +1,12 @@
 Changelog
 =========
 
+### 0.4.0 2015-03-27
+
+* Adding `Roman` to convert integers to roman numerals and roman
+  numerals to integers.
+* `DotArray#set()` return `$this` to allow for chained method calls.
+
 ### 0.3.2 2015-02-03
 
 * The set flags of NamedBitmask can now be looped over using

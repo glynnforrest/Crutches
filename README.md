@@ -30,7 +30,7 @@ composer.json file:
 ```json
 {
     "require": {
-        "glynnforrest/crutches": "0.3.*"
+        "glynnforrest/crutches": "0.4.*"
     }
 }
 ```

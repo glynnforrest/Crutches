@@ -1,7 +1,12 @@
 {
     "name": "glynnforrest/crutches",
     "description": "A PHP utility library",
-    "keywords": ["list", "bitmask", "dotarray", "utility", "tool", "support"],
+    "keywords": [
+        "list",
+        "bitmask",
+        "dotarray",
+        "roman numerals"
+    ],
     "authors": [
         {
             "name": "Glynn Forrest",
