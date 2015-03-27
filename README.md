@@ -18,6 +18,7 @@ Included classes:
   (e.g. user permissions).
 * NamedBitmask - An extension of Bitmask that abstracts numeric flags
   away from the user, instead referring to named flags.
+* Roman - Convert integers to roman numerals and back again.
 
 See the docs/ directory for detailed usage on each.
 

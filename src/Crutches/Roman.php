@@ -3,7 +3,7 @@
 namespace Crutches;
 
 /**
- * Convert integers to and from roman numerals.
+ * Convert integers to roman numerals and back again.
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
